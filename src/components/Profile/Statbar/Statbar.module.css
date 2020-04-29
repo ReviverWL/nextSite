@@ -1,0 +1,11 @@
+.statbar{
+    grid-column: 1/3;
+    /* height: 100px; */
+    /* height: auto; */
+
+  }
+  
+.statbar img{
+    width: 100%;
+    height: 100px;
+  }

@@ -1,0 +1,8 @@
+.myHeader{
+    grid-column: 1/3;
+  }
+
+  .myHeader img{
+    height: 100px;
+    width: 100px;
+  }

@@ -3,30 +3,3 @@
   grid-template-rows: 1fr 9fr;
   grid-template-columns: 1fr 9fr;
 }
-
-.my-header{
-  grid-column: 1/3;
-  
-
-}
-
-.my-header img{
-  height: 70px;
-  width: 70px;
-}
-
-
-
-.my-content{
-  display: grid;
-}
-
-.my-content.statbar{
-  grid-column: 1/3;
-  height: 20px;
-}
-
-.my-content .statbar img{
-  width: 100%;
-  height: 50px;
-}

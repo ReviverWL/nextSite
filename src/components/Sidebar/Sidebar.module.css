@@ -1,0 +1,20 @@
+.mainmenu{
+    background-color: darkgray;
+    text-align: center;
+}
+
+.item{
+    width: 100%;
+}
+
+.item.nice:hover a{
+    display: block;
+    color: aquamarine;
+    background-color: rgb(48, 95, 0);
+}
+
+.item a:hover{
+    color: aquamarine;
+}
+
+
