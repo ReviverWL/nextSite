@@ -7,7 +7,7 @@ import Ava from './Ava/Ava'
 const Profile = () => {
     return <div className={profile.mainProfile}>
         <Statbar />
-        <Ava/>
+        <Ava />
         <div className='info'></div>
         <MyPosts />
     </div>

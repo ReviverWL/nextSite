@@ -3,18 +3,23 @@
     text-align: center;
 }
 
-.item{
-    width: 100%;
+.item a{
+    text-decoration: none;
 }
 
-.item.nice:hover a{
+.item:hover a{
     display: block;
     color: aquamarine;
-    background-color: rgb(48, 95, 0);
+    background-color: rgb(98, 100, 93);
 }
 
 .item a:hover{
     color: aquamarine;
+}
+
+a.active{
+    display: block;
+    background-color: darkgreen;
 }
 
 

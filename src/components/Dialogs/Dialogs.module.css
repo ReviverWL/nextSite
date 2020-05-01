@@ -1,0 +1,6 @@
+.dialogs{
+  color: aqua;
+  background-color: black;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+}
