@@ -4,11 +4,11 @@ import { NavLink } from 'react-router-dom';
 
 const Sidebar = () => {
     return <nav className={menu.mainmenu}>
-        <div className={menu.item}><NavLink to='/profile' activeClassName={menu.active}>Profile</NavLink></div>
-        <div className={menu.item}><NavLink to='/messages' activeClassName={menu.active}>Messages</NavLink></div>
-        <div className={menu.item}><NavLink to='/news' activeClassName={menu.active}>News</NavLink></div>
-        <div className={menu.item}><NavLink to='/ミク' activeClassName={menu.active}>Music</NavLink></div>
-        <div className={menu.item}><NavLink to='/settings' activeClassName={menu.active}>Settings</NavLink></div>
+        <div className={menu.item}><NavLink to='/profile' activeClassName={menu.active}>Профиль</NavLink></div>
+        <div className={menu.item}><NavLink to='/dialogs' activeClassName={menu.active}>Диалоги</NavLink></div>
+        <div className={menu.item}><NavLink to='/news' activeClassName={menu.active}>Новости</NavLink></div>
+        <div className={menu.item}><NavLink to='/ミク' activeClassName={menu.active}>Музыка</NavLink></div>
+        <div className={menu.item}><NavLink to='/settings' activeClassName={menu.active}>Настройки</NavLink></div>
     </nav>
 };
 

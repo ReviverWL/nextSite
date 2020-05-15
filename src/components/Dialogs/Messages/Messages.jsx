@@ -4,7 +4,7 @@ let batonchik = React.createRef();
 
 let ourPoem = ()=> alert(batonchik.current.value);
 
-const Message = (props) => {
+const Messages = (props) => {
     return (
         <div>{props.message}
         <textarea ref={batonchik}></textarea>
@@ -13,4 +13,4 @@ const Message = (props) => {
         )
 }
 
-export default Message;
+export default Messages;

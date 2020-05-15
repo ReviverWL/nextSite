@@ -5,6 +5,7 @@
 
 .item a{
     text-decoration: none;
+    color: black;
 }
 
 .item:hover a{

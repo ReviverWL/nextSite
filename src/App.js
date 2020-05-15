@@ -11,16 +11,17 @@ import Settings from './components/Settings/Settings';
 
 
 const App = (props) => {
+// debugger
   return (
     <BrowserRouter>
       <div className='app-wrapper'>
         <Header />
         <Sidebar />
-        <Route exact path='/profile' component = {Profile} />
-        <Route path='/messages' render = { ()=><Dialogs />} />
-        <Route path='/news' component = {News} />
-        <Route path='/ミク' component = {Music} />
-        <Route path='/settings' component = {Settings} />
+        <Route exact path='/profile' render = {()=><Profile store= {props.store} dispatch={props.dispatch}/>} />
+        <Route path='/dialogs' render = { ()=><Dialogs dialogs = {props.store.dialogsPage}/>} />
+        <Route path='/news' render = {()=><News />} />
+        <Route path='/ミク' render = {()=><Music />} />
+        <Route path='/settings' render = {()=><Settings />} />
       </div>
     </BrowserRouter>
 

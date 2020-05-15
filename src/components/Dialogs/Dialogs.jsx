@@ -1,20 +1,16 @@
 import React from 'react';
 import letters from './Dialogs.module.css'
-import Dialog from './Dialog/Dialog'
-import Message from './Messages/Message';
+import Users from './Dialog/Users'
+import Messages from './Messages/Messages';
 
 const Dialogs = (props) => {
-
     return (
             <div className={letters.dialogs}>
-                <div>
-                    
-                    <Dialog />
+                <div>                    
+                    <Users users ={props.dialogs.users}/>
                 </div>
                 <div>
-                    <Message/>
-                    {/* <Route path='/dialogs/0139' component={<Message message='Sumimasen'/>} /> */}
-                    {/* <Route path='/dialogs/0139' component={<Message message='Hello'/>} /> */}
+                    <Messages/>
                 </div>
             </div>
     )

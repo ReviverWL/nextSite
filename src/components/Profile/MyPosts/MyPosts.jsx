@@ -2,11 +2,11 @@ import React from 'react';
 import myPosts from './MyPosts.module.css';
 import Post from './Post/MyPost';
 
-const MyPosts = () => {
+const MyPosts = (props) => {
+
     return (
         <div className={myPosts.myPosts}>
-            <Post mess="azaazzaza" like='25'/>
-            <Post mess='初音ミク' like='39'/>
+            <Post store={props.store}  dispatch={props.dispatch} />
         </div>
     )
 
