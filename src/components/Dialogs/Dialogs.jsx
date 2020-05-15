@@ -7,7 +7,7 @@ const Dialogs = (props) => {
     return (
             <div className={letters.dialogs}>
                 <div>                    
-                    <Users users ={props.dialogs.users}/>
+                    <Users store ={props.store}/>
                 </div>
                 <div>
                     <Messages/>

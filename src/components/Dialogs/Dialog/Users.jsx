@@ -5,7 +5,7 @@ const Users = (props) => {
 
 return(  
         <div >
-            <DialogUser users ={props.users}/>
+            <DialogUser store={props.store}/>
         </div>  
     )
 };

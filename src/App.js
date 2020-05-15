@@ -18,7 +18,7 @@ const App = (props) => {
         <Header />
         <Sidebar />
         <Route exact path='/profile' render = {()=><Profile store= {props.store} dispatch={props.dispatch}/>} />
-        <Route path='/dialogs' render = { ()=><Dialogs dialogs = {props.store.dialogsPage}/>} />
+        <Route path='/dialogs' render = { ()=><Dialogs store = {props.store}/>} />
         <Route path='/news' render = {()=><News />} />
         <Route path='/ミク' render = {()=><Music />} />
         <Route path='/settings' render = {()=><Settings />} />
