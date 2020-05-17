@@ -1,6 +1,6 @@
 import React from 'react';
 import profile from './Profile.module.css';
-import MyPosts from './MyPosts/MyPosts';
+import MyPostsContainer from './MyPosts/MyPostsContainer';
 import Statbar from './Statbar/Statbar';
 import Ava from './Ava/Ava'
 
@@ -10,7 +10,7 @@ const Profile = (props) => {
         <Statbar />
         <Ava />
         <div className='info'></div>
-        <MyPosts store= {props.store} dispatch={props.dispatch}/>
+        <MyPostsContainer />
     </div>
 };
 export default Profile;

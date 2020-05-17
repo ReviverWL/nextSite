@@ -5,25 +5,18 @@ import App from './App';
 import store from './redux/store';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux'
 
-const antirender = (state) => {
   ReactDOM.render(
     <React.StrictMode>
-      <BrowserRouter>
-        <App store={store} dispatch={store.dispatch.bind(store)} />
-      </BrowserRouter>
+      <Provider store={store}>
+        <BrowserRouter>
+          <App  />
+        </BrowserRouter>
+      </Provider>
     </React.StrictMode>,
     document.getElementById('root')
   )
-}
-store.subscribe (() => {
-  let state = store.getState();
-  antirender(state);
-})
-
-antirender(store.getState())
-
-
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

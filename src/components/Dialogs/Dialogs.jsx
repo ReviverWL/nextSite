@@ -1,17 +1,13 @@
 import React from 'react';
 import letters from './Dialogs.module.css'
-import Users from './Dialog/Users'
-import Messages from './Messages/Messages';
+import DialogUserContainer from './Dialog/DialogUserContainer'
+import MessagesContainer from './Messages/MessagesContainer';
 
 const Dialogs = (props) => {
     return (
             <div className={letters.dialogs}>
-                <div>                    
-                    <Users store ={props.store}/>
-                </div>
-                <div>
-                    <Messages/>
-                </div>
+                    <DialogUserContainer />
+                    <MessagesContainer/>
             </div>
     )
 };
