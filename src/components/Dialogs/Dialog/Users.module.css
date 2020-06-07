@@ -1,8 +1,8 @@
 @-webkit-keyframes pulsate {
-  50% { color: #fff; text-shadow: 0 -1px rgba(0,0,0,.3), 0 0 5px #ffd, 0 0 8px #fff; }
+  50% { color: #fff; text-shadow: 0 -1px rgba(0,0,0,.3), 0 0 5px rgb(255, 0, 0), 0 0 8px rgb(255, 0, 0); }
 }
 @keyframes pulsate {
-  50% { color: #fff; text-shadow: 0 -1px rgba(0,0,0,.3), 0 0 5px rgb(255, 255, 0), 0 0 8px rgb(255, 255, 0); }
+  50% { color: #fff; text-shadow: 0 -1px rgba(0,0,0,.3), 0 0 5px rgb(0, 60, 255), 0 0 8px rgb(102, 255, 0); }
 }
 
 .dialog{
@@ -21,3 +21,4 @@
   /* color: whitesmoke; */
   text-decoration: none;
 }
+

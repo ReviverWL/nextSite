@@ -8,6 +8,7 @@ const Sidebar = () => {
         <div className={menu.item}><NavLink to='/dialogs' activeClassName={menu.active}>Диалоги</NavLink></div>
         <div className={menu.item}><NavLink to='/news' activeClassName={menu.active}>Новости</NavLink></div>
         <div className={menu.item}><NavLink to='/ミク' activeClassName={menu.active}>Музыка</NavLink></div>
+        <div className={menu.item}><NavLink to='/users' activeClassName={menu.active}>Лапочки Юзеры</NavLink></div>
         <div className={menu.item}><NavLink to='/settings' activeClassName={menu.active}>Настройки</NavLink></div>
     </nav>
 };

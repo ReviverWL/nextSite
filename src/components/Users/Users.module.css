@@ -1,0 +1,52 @@
+.global{
+    background-color: gray;
+}
+
+.location{
+    text-align: right;    
+}
+
+.location p{
+    margin: 0;
+}
+
+.wrapper{
+    display: grid;
+    grid-template-columns: 1fr 7fr;
+    padding-left: 20px;
+    color: green;
+    background-color: gray;
+}
+
+.ava{
+    text-align: right;
+}
+
+.butt{
+    text-align: right;
+}
+
+.avatar img{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+
+.user{
+    padding: 20px;
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr;
+}
+
+.status{
+    justify-self: start;
+    align-items: end;
+    align-self: end;
+}
+
+.pageNumber{
+    color: cyan;
+    padding: 5px;
+}

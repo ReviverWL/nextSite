@@ -3,27 +3,29 @@ import Header from './components/Header/Header'
 import './App.css';
 import Sidebar from './components/Sidebar/Sidebar';
 import Profile from './components/Profile/Profile';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { HashRouter, Route } from 'react-router-dom';
 import Dialogs from './components/Dialogs/Dialogs';
 import Music from './components/Music/Music';
 import News from './components/News/News';
 import Settings from './components/Settings/Settings';
+import UsersContainer from './components/Users/UsersContainer'
 
 
 const App = (props) => {
 // debugger
   return (
-    <BrowserRouter>
+    <HashRouter>
       <div className='app-wrapper'>
         <Header />
         <Sidebar />
-        <Route exact path='/profile' render = {()=><Profile store= {props.store} dispatch={props.dispatch}/>} />
-        <Route path='/dialogs' render = { ()=><Dialogs store = {props.store}/>} />
+        <Route exact path='/profile' render = {()=><Profile />} />
+        <Route path='/dialogs' render = { ()=><Dialogs />} />
         <Route path='/news' render = {()=><News />} />
         <Route path='/ミク' render = {()=><Music />} />
+        <Route path='/users' render = {()=><UsersContainer />} />
         <Route path='/settings' render = {()=><Settings />} />
       </div>
-    </BrowserRouter>
+    </HashRouter>
 
   );
 }

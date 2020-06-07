@@ -19,7 +19,7 @@ const Post = (props) => {
             }
     )
     return (
-        <div className={ mess.myPosts}>
+        <div className={mess.myPosts}>
             <div>{allPosts}</div>
             <div>
                 <textarea onKeyPress ={event=> {

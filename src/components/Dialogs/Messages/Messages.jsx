@@ -2,11 +2,12 @@ import React from 'react';
 import colored from './Saya.module.css'
 
 let batonchik = React.createRef();
-
 let ourPoem = ()=> alert(batonchik.current.value);
 
+
+
 const Messages = (props) => {
-    // debugger
+
     let star = props.messages.map((mess) => {
         if (mess.id === 4 || mess.id === 1) {
         return <div className={colored.vocaloid}>{mess.message}</div>;

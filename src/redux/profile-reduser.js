@@ -1,6 +1,5 @@
 const ADD_POST = 'ADD-POST'
 const TEXTFLOW_CHANGE = 'TEXTFLOW-CHANGE'
-
 let initialState = {
 
     posts: [
@@ -14,9 +13,7 @@ let initialState = {
 const profileReduser = (state = initialState, action) => {
     switch (action.type) {
         case ADD_POST:{
-            let newPost = { id: 4, text: state.textflowPost, likes: 0 }
-            // state.posts.push(newPost)
-            // state.textflowPost = ''
+            let newPost = { id: state.posts.length + 1, text: state.textflowPost, likes: 0 }
             let stateCopy = { ...state }
             stateCopy.posts = [...state.posts]
             stateCopy.posts.push(newPost)
@@ -24,7 +21,6 @@ const profileReduser = (state = initialState, action) => {
             return stateCopy
         }
         case TEXTFLOW_CHANGE:{
-            // state.textflowPost = action.text
             let stateCopy = { ...state }
             stateCopy.textflowPost = action.text
             return stateCopy
