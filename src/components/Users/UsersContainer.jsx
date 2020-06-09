@@ -2,7 +2,7 @@ import React from 'react'
 import * as axios from 'axios'
 import Users from './Users'
 import Preloader from './../../utility_components/Preloader'
-import {followAC, unfollowAC, setUsersAC, changePageAC, setUsersCountAC, fetchStatusAC} from './../../redux/users-reduser'
+import {follow, unfollow, setUsers, changePage, setUsersCount, fetchStatus} from './../../redux/users-reduser'
 import { connect } from 'react-redux'
 //split & join
 
@@ -58,17 +58,6 @@ const mapStateToProps = (state) => {
     }
 
 }
-const mapDispatchToProps = (dispatch) => {
-    return{
-        follow: (id)=>{dispatch(followAC(id))},
-        unfollow: (id)=>{dispatch(unfollowAC(id))},
-        setUsers: (users)=>{dispatch(setUsersAC(users))},
-        changePage: (currentPage)=>{dispatch(changePageAC(currentPage))},
-        setUsersCount: (usersCount)=>{dispatch(setUsersCountAC(usersCount))},
-        fetchStatus: (isFetch)=>{dispatch(fetchStatusAC(isFetch))}
-    }
-}
 
-
-const UsersContainer = connect(mapStateToProps, mapDispatchToProps)(UsersAPI)
+const UsersContainer = connect(mapStateToProps, {follow,unfollow,setUsers,changePage,setUsersCount,fetchStatus})(UsersAPI)
 export default UsersContainer

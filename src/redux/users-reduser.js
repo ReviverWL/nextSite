@@ -91,24 +91,24 @@ const usersReduser = (state = initialState, action) => {
     }
 
 
-export const changePageAC = (currentPage)=>{
+export const changePage = (currentPage)=>{
     return{type: CHANGE_PAGE, currentPage}
 }
 
-export const setUsersAC = (users)=>{
+export const setUsers = (users)=>{
     return{type:SET_USERS, users}
 }
-export const setUsersCountAC = (usersCount)=>{
+export const setUsersCount = (usersCount)=>{
     return{type:SET_USERS_COUNT, usersCount}
 }
-export const fetchStatusAC = (isFetch)=>{
+export const fetchStatus = (isFetch)=>{
     return{type:IS_FETCH_STATUS, isFetch}
 }
 
-export const followAC = (id)=>{
+export const follow = (id)=>{
     return{type: FOLLOW, id}
 }
-export const unfollowAC = (id)=>{
+export const unfollow = (id)=>{
     return{type: UNFOLLOW, id}
 }
 
