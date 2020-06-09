@@ -1,7 +1,8 @@
 import React from 'react'
 import * as axios from 'axios'
 import Users from './Users'
-import {followAC, unfollowAC, setUsersAC, changePageAC} from './../../redux/users-reduser'
+import Preloader from './../../utility_components/Preloader'
+import {followAC, unfollowAC, setUsersAC, changePageAC, setUsersCountAC, fetchStatusAC} from './../../redux/users-reduser'
 import { connect } from 'react-redux'
 //split & join
 
@@ -12,22 +13,41 @@ import { connect } from 'react-redux'
 
 class UsersAPI extends React.Component {
     componentDidMount(){
+        this.props.fetchStatus(true)
  // const setUsers = ()=>{
         // if(props.usersPage.users.length === 0){
-            axios.get("https://social-network.samuraijs.com/api/1.0/users")
+            axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.usersPage.currentPage}&count=${this.props.usersPage.pageSize}`)
             .then(response => {
                 this.props.setUsers(response.data.items)
+                this.props.setUsersCount(response.data.totalCount)
+                this.props.fetchStatus(false)
+
             })
             // }
         // }
+        
+    }
+    setCurrentPage = (page)=>{
+        this.props.changePage(page)
+        this.props.fetchStatus(true)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.usersPage.pageSize}`)
+        .then(response => {
+            this.props.setUsers(response.data.items)
+            this.props.fetchStatus(false)
+        })
     }
     render(){
-        return <Users 
+        // debugger
+        
+        return<> 
+        {this.props.usersPage.isFetch ? <Preloader />:null}
+        <Users 
         usersPage={this.props.usersPage} 
         follow={this.props.follow}
         unfollow={this.props.unfollow}
-        changePage={this.props.changePage}
+        setCurrentPage={this.setCurrentPage}
         />
+        </>
 }
 }
 
@@ -43,7 +63,9 @@ const mapDispatchToProps = (dispatch) => {
         follow: (id)=>{dispatch(followAC(id))},
         unfollow: (id)=>{dispatch(unfollowAC(id))},
         setUsers: (users)=>{dispatch(setUsersAC(users))},
-        changePage: (currentPage)=>{dispatch(changePageAC(currentPage))}
+        changePage: (currentPage)=>{dispatch(changePageAC(currentPage))},
+        setUsersCount: (usersCount)=>{dispatch(setUsersCountAC(usersCount))},
+        fetchStatus: (isFetch)=>{dispatch(fetchStatusAC(isFetch))}
     }
 }
 

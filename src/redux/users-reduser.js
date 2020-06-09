@@ -2,6 +2,8 @@ const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET_USERS'
 const CHANGE_PAGE = 'CHANGE_PAGE'
+const SET_USERS_COUNT = 'SET_USERS_COUNT'
+const IS_FETCH_STATUS = 'IS_FETCH_STATUS'
 
 let initialState={
     users:[
@@ -10,9 +12,12 @@ let initialState={
         // {id: 3, name: 'Элли', lastName: 'Кавай', follower:true , status: 'Посылаю всех на...видео с ответами)', avatar: '', dislocation:{country: 'Россия',　city: 'Создатель сайта не вдавался в такие подробности'}},
         // {id: 4, name: 'Reviver', lastName: 'WLM', follower:false , status: 'Бункер Save Us', avatar: '', dislocation:{country: 'Вакуум',　city: 'Амёба'}}
     ],
-    pages: [1, 2],
-    usersCount: 60,
+    pages: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+    usersCount: 0,
+    pageSize: 4,
+    stepAside: 4, //кол-во страниц по бокам относительно выделенной
     currentPage: 1,
+    isFetch: false
 }
 
 const usersReduser = (state = initialState, action) => {
@@ -39,46 +44,52 @@ const usersReduser = (state = initialState, action) => {
             return{
                 ...state, users: action.users
         }
-        case CHANGE_PAGE:{
-                let stateCopy = {...state}
-                stateCopy.currentPage = action.currentPage
-                stateCopy.pages = [...state.pages]
-                
-                    debugger
-                    const stepAside = 4//кол-во страниц по бокам относительно выделенной
-                    stateCopy.pages.length = 0
-                    switch (true) {
-                        case (stateCopy.currentPage >= 1 && stateCopy.currentPage <= 5)://страницы с 1 по 9
-                            for (let i = 1; i <= 10; i++) {
-                                stateCopy.pages.push(i)
-                            }
-                            break;
-                        case (stateCopy.currentPage >= 6 && stateCopy.currentPage <= stateCopy.countUsers - stepAside)://логика страниц в центре(тех, что при активации изменяют номера страниц) не считая последние
-                            const startCounter = stateCopy.currentPage - stepAside
-                            const endCounter = stateCopy.currentPage + stepAside
-                        for (let i = startCounter; i <= endCounter; i++) {
-                                stateCopy.pages.push(i)
-                            }
-                            break;
-                        case (stateCopy.currentPage > stateCopy.countUsers - stepAside)://фиксированное кол-во страниц
-                            for (let i = stateCopy.countUsers - stepAside * 2; i <= stateCopy.countUsers; i++) {
-                                stateCopy.pages.push(i)
-                            }
-                            break;
-                        case (stateCopy.currentPage <= 0 || stateCopy.currentPage > stateCopy.countUsers):
-                            alert("Такой страницы не существует. Введите корректный номер страницы.")
-                            break
-                        default:
-                            alert(/*"Введите номер страницы. Данное поле распознаёт только цифры."*/"Что-то пошло не так. Данные отображаются некорректно. Свяжитесь с администратором")//Место для try/catch
-                            break;
-                    
-                }
-                return stateCopy
+        case SET_USERS_COUNT:
+            return{
+                ...state, usersCount: action.usersCount
         }
+        case IS_FETCH_STATUS:
+            return{
+                ...state, isFetch: action.isFetch
+        }
+
+        case CHANGE_PAGE:
+            let stateCopy = { ...state }
+            let pagesCount = Math.ceil (stateCopy.usersCount / stateCopy.pageSize)
+            stateCopy.currentPage = action.currentPage
+            stateCopy.pages = [...state.pages]
+            // debugger
+            stateCopy.pages.length = 0
+            if (stateCopy.currentPage >= 1 && stateCopy.currentPage <= 5) { //страницы с 1 по 9
+
+                for (let i = 1; i <= 10; i++) {
+                    stateCopy.pages.push(i)
+                }
+            } 
+            else if (stateCopy.currentPage >= 6 && stateCopy.currentPage <= pagesCount - stateCopy.stepAside) {//логика страниц в центре(тех, что при активации изменяют номера страниц) не считая последние
+                const startCounter = stateCopy.currentPage - stateCopy.stepAside
+                const endCounter = stateCopy.currentPage + stateCopy.stepAside
+                for (let i = startCounter; i <= endCounter; i++) {
+                    stateCopy.pages.push(i)
+                }
+            }
+            else if (stateCopy.currentPage > pagesCount - stateCopy.stepAside && stateCopy.currentPage<= pagesCount) {//фиксированное кол-во страниц
+                for (let i = pagesCount - stateCopy.stepAside * 2; i <= pagesCount; i++) {
+                    stateCopy.pages.push(i)
+                }
+            }
+            else if (stateCopy.currentPage <= 0 || stateCopy.currentPage > pagesCount) {
+                alert("Такой страницы не существует. Введите корректный номер страницы.")
+            }            
+            else {
+                alert(/*"Введите номер страницы. Данное поле распознаёт только цифры."*/"Что-то пошло не так. Данные отображаются некорректно. Свяжитесь с администратором")//Место для try/catch
+            }
+            return stateCopy
         default:
             return state
     }
-}
+    }
+
 
 export const changePageAC = (currentPage)=>{
     return{type: CHANGE_PAGE, currentPage}
@@ -86,6 +97,12 @@ export const changePageAC = (currentPage)=>{
 
 export const setUsersAC = (users)=>{
     return{type:SET_USERS, users}
+}
+export const setUsersCountAC = (usersCount)=>{
+    return{type:SET_USERS_COUNT, usersCount}
+}
+export const fetchStatusAC = (isFetch)=>{
+    return{type:IS_FETCH_STATUS, isFetch}
 }
 
 export const followAC = (id)=>{

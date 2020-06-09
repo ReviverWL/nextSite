@@ -46,7 +46,10 @@
     align-self: end;
 }
 
-.pageNumber{
-    color: cyan;
+.pages{
+    color: black;   
     padding: 5px;
+}
+.currentPage{
+    color: cyan;
 }
