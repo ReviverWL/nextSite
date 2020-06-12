@@ -11,7 +11,7 @@ import { withRouter } from 'react-router-dom'
 class ProfileCont extends React.Component {
     componentDidMount(){
         // debugger
-        let userId = !this.props.match.params.userId ? 2: this.props.match.params.userId
+        let userId = !this.props.match.params.userId ? 8318: this.props.match.params.userId
         this.props.fetchStatus(true)
         axios.get(`https://social-network.samuraijs.com/api/1.0/profile/` + userId)
         .then(response=>{

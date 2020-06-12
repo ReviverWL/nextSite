@@ -1,5 +1,5 @@
 import React from 'react';
-import Header from './components/Header/Header'
+import HeaderContainer from './components/Header/HeaderContainer'
 import './App.css';
 import Sidebar from './components/Sidebar/Sidebar';
 import ProfileContainer from './components/Profile/ProfileContainer';
@@ -16,7 +16,7 @@ const App = (props) => {
   return (
     <HashRouter>
       <div className='app-wrapper'>
-        <Header />
+        <HeaderContainer />
         <Sidebar />
         <Route path='/profile/:userId?' render = {()=><ProfileContainer />} />
         <Route path='/dialogs' render = { ()=><Dialogs />} />
