@@ -1,5 +1,10 @@
 .ava img{
-  width: 150px;
-  height: 100%;
+  width: 45%;
+  height:45%;
   border-radius: 50%;
+}
+.ava{ 
+  background-color: chartreuse;
+  text-align: center;
+  align-self: center;
 }

@@ -1,5 +1,7 @@
 import React from 'react'
 import style from './Users.module.css'
+import out_of_photo from '../../assets/out_of_photo.jpg'
+import { NavLink } from 'react-router-dom'
 
 const Users = (props) => {
     let ss = React.createRef()
@@ -28,7 +30,9 @@ const Users = (props) => {
                     <div key={user.id} className={style.wrapper}>
                         <div className={style.avatar}>
                             <div className={style.ava}>
-                                <img src={user.photos.small} alt="Аву съел плохой интернет" />
+                                <NavLink to={'profile/'+ user.id}>
+                                <img src={user.photos.small === null? out_of_photo:user.photos.small} alt="Аву съел плохой интернет" />
+                                </NavLink>
                             </div>
                             <div className={style.butt}>
                                 {user.follower ? <button onClick={() => { props.unfollow(user.id) }}>Отписаться</button> : <button onClick={() => { props.follow(user.id) }}>Подписаться</button>}

@@ -1,5 +1,7 @@
 const ADD_POST = 'ADD-POST'
 const TEXTFLOW_CHANGE = 'TEXTFLOW-CHANGE'
+const PROFILE_CHANGE = 'PROFILE_CHANGE'
+
 let initialState = {
 
     posts: [
@@ -7,7 +9,8 @@ let initialState = {
         { id: 2, text: 'azazazazaaza', likes: 10 },
         { id: 3, text: 'nyao', likes: 1024 },
     ],
-    textflowPost: ''
+    textflowPost: '',
+    profileInfo: null
 }
 
 const profileReduser = (state = initialState, action) => {
@@ -25,12 +28,18 @@ const profileReduser = (state = initialState, action) => {
             stateCopy.textflowPost = action.text
             return stateCopy
         }
+        case PROFILE_CHANGE:{
+            let stateCopy = { ...state }
+            stateCopy.profileInfo = action.info
+            return stateCopy
+        }
         default:
             return state
     }
 }
 
-export const addPostActionCreator = () => ({ type: ADD_POST })
-export const textflowActionCreator = (text) => ({ type: TEXTFLOW_CHANGE, text: text })
+export const addPost = () => ({ type: ADD_POST })
+export const textflow = (text) => ({ type: TEXTFLOW_CHANGE, text })
+export const profileInfo = (info) => ({ type: PROFILE_CHANGE, info })
 
 export default profileReduser

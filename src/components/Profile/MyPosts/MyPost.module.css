@@ -1,0 +1,8 @@
+.myPosts > * { min-width: 0;}
+.myPosts  {
+    grid-column: 1/3;
+    color: darkviolet;
+    background-color: darkorange;
+    overflow-wrap : break-word;
+    max-width: 100%;
+}

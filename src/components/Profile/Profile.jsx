@@ -1,16 +1,19 @@
 import React from 'react';
 import profile from './Profile.module.css';
-import MyPostsContainer from './MyPosts/MyPostsContainer';
+import MyPost from './MyPosts/MyPost';
 import Statbar from './Statbar/Statbar';
 import Ava from './Ava/Ava'
+import ProfileInfo from './ProrileInfo/ProfileInfo';
+import Preloader from '../../utility_components/Preloader';
 
 const Profile = (props) => {
-    
     return <div className={profile.mainProfile}>
         <Statbar />
-        <Ava />
-        <div className='info'></div>
-        <MyPostsContainer />
+        {props.profilePage.profileInfo === null?<Preloader/>:<>
+        <Ava photo={props.profilePage.profileInfo.photos.large}/>
+        <ProfileInfo info={props.profilePage.profileInfo}/> 
+        <MyPost posts={props.profilePage.posts}
+         addPost={props.addPost} textflow={props.textflow} textflowPost={props.profilePage.textflowPost}/></>}
     </div>
 };
 export default Profile;

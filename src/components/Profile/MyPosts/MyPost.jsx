@@ -3,33 +3,25 @@ import mess from './MyPost.module.css'
 let post = React.createRef();
 
 const Post = (props) => {
-    let textflow = ()=>{
-        props.textflow(post.current.value)
-    }
-    let addPost = ()=>{
-        props.addPost()
-    }
-    let allPosts = props.profilePage.posts.map ( (postText)=> {
+    let allPosts = props.posts.map ( (postText)=> {
         return(
             <div>
                 <div>{postText.text}</div>
                 <span>likes: {postText.likes}</span>
-            </div>
-            )
-            }
-    )
+            </div>)})
     return (
         <div className={mess.myPosts}>
-            <div>{allPosts}</div>
+            <div >{allPosts}</div>
             <div>
                 <textarea onKeyPress ={event=> {
                 if(event.key==="Enter") {
-                    addPost()
+                    props.addPost()
                     event.preventDefault()}}}
-                value={props.profilePage.textflowPost} onChange={textflow} ref={post}/>
+                value={props.textflowPost} 
+                onChange={()=>{props.textflow(post.current.value)}} ref={post}/>
             </div>
             <div>
-                <button onClick={ addPost }>Впиши своё имя в историю</button>
+                <button onClick={ props.addPost }>Впиши своё имя в историю</button>
             </div>
         </div>
     )

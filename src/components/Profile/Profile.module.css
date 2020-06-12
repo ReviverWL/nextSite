@@ -1,5 +1,7 @@
+/* .grid > * { min-width: 0;} */
+
 .mainProfile{
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 100px 150px auto auto auto;    
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: 120px 1fr 2fr;
   }

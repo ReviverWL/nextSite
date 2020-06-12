@@ -1,10 +1,12 @@
 import React from 'react';
+import out_of_photo from '../../../assets/out_of_photo.jpg'
 import ava from './Ava.module.css'
 
-const Ava = () => {
+const Ava = (props) => {
+    
     return (
         <div className={ava.ava}>
-            <img src='https://sun9-20.userapi.com/c824201/v824201969/173425/UZNGRozhtic.jpg?ava=1' alt='nani' />
+            <img src={props.photo === null ?  out_of_photo: props.photo} alt='nani' />
         </div>
 
         )

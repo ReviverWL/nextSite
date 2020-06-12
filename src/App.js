@@ -2,7 +2,7 @@ import React from 'react';
 import Header from './components/Header/Header'
 import './App.css';
 import Sidebar from './components/Sidebar/Sidebar';
-import Profile from './components/Profile/Profile';
+import ProfileContainer from './components/Profile/ProfileContainer';
 import { HashRouter, Route } from 'react-router-dom';
 import Dialogs from './components/Dialogs/Dialogs';
 import Music from './components/Music/Music';
@@ -18,7 +18,7 @@ const App = (props) => {
       <div className='app-wrapper'>
         <Header />
         <Sidebar />
-        <Route exact path='/profile' render = {()=><Profile />} />
+        <Route path='/profile/:userId?' render = {()=><ProfileContainer />} />
         <Route path='/dialogs' render = { ()=><Dialogs />} />
         <Route path='/news' render = {()=><News />} />
         <Route path='/ミク' render = {()=><Music />} />

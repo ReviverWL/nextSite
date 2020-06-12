@@ -62,7 +62,7 @@ const usersReduser = (state = initialState, action) => {
             stateCopy.pages.length = 0
             if (stateCopy.currentPage >= 1 && stateCopy.currentPage <= 5) { //страницы с 1 по 9
 
-                for (let i = 1; i <= 10; i++) {
+                for (let i = 1; i < 10; i++) {
                     stateCopy.pages.push(i)
                 }
             } 

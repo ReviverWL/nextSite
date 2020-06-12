@@ -21,7 +21,6 @@ class UsersAPI extends React.Component {
                 this.props.setUsers(response.data.items)
                 this.props.setUsersCount(response.data.totalCount)
                 this.props.fetchStatus(false)
-
             })
             // }
         // }
@@ -40,20 +39,18 @@ class UsersAPI extends React.Component {
         // debugger
         
         return<> 
-        {this.props.usersPage.isFetch ? <Preloader />:null}
+        {this.props.usersPage.isFetch ? <Preloader />:
         <Users 
         usersPage={this.props.usersPage} 
         follow={this.props.follow}
         unfollow={this.props.unfollow}
-        setCurrentPage={this.setCurrentPage}
-        />
+        setCurrentPage={this.setCurrentPage}/>}
         </>
 }
 }
 
 const mapStateToProps = (state) => {
     return{
-        // let stateCopy = {...state}
         usersPage: state.usersPage
     }
 
