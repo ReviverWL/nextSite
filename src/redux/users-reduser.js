@@ -4,6 +4,7 @@ const SET_USERS = 'SET_USERS'
 const CHANGE_PAGE = 'CHANGE_PAGE'
 const SET_USERS_COUNT = 'SET_USERS_COUNT'
 const IS_FETCH_STATUS = 'IS_FETCH_STATUS'
+const FOLLOW_UNFOLLOW_PROGRESS = 'FOLLOW_UNFOLLOW_PROGRESS'
 
 let initialState={
     users:[
@@ -14,19 +15,28 @@ let initialState={
     ],
     pages: [1, 2, 3, 4, 5, 6, 7, 8, 9],
     usersCount: 0,
-    pageSize: 4,
+    pageSize: 20,
     stepAside: 4, //кол-во страниц по бокам относительно выделенной
     currentPage: 1,
-    isFetch: false
+    isFetch: false,
+    followUnfollowProgress: []
 }
 
 const usersReduser = (state = initialState, action) => {
     switch (action.type) {
+
+        case FOLLOW_UNFOLLOW_PROGRESS:
+            return {
+                ...state,
+                followUnfollowProgress: action.progress ? [...state.followUnfollowProgress, action.id]
+                :[...state.followUnfollowProgress.filter(id => id != action.id)]
+            }
+
         case FOLLOW:
             return {
                 ...state,
                 users: state.users.map(user => {
-                    if (user.id === action.id) return { ...user, follower: true }
+                    if (user.id === action.id) return { ...user, followed: true }
                     return user
                 }
                 )
@@ -35,7 +45,7 @@ const usersReduser = (state = initialState, action) => {
             return {
                 ...state,
                 users: state.users.map(user => {
-                    if (user.id === action.id) return { ...user, follower: false }
+                    if (user.id === action.id) return { ...user, followed: false }
                     return user
                 }
                 )
@@ -82,7 +92,7 @@ const usersReduser = (state = initialState, action) => {
                 alert("Такой страницы не существует. Введите корректный номер страницы.")
             }            
             else {
-                alert(/*"Введите номер страницы. Данное поле распознаёт только цифры."*/"Что-то пошло не так. Данные отображаются некорректно. Свяжитесь с администратором")//Место для try/catch
+                alert("Что-то пошло не так. Данные отображаются некорректно. Свяжитесь с администратором")//Место для try/catch
             }
             return stateCopy
         default:
@@ -91,8 +101,12 @@ const usersReduser = (state = initialState, action) => {
     }
 
 
+
 export const changePage = (currentPage)=>{
     return{type: CHANGE_PAGE, currentPage}
+}
+export const followUnfollowProgress = (progress, id)=>{
+    return{type: FOLLOW_UNFOLLOW_PROGRESS, progress, id}
 }
 
 export const setUsers = (users)=>{

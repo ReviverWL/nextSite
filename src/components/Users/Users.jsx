@@ -4,6 +4,7 @@ import out_of_photo from '../../assets/out_of_photo.jpg'
 import { NavLink } from 'react-router-dom'
 
 const Users = (props) => {
+    // debugger
     let ss = React.createRef()
     //Подаём 2 строки типа Мику Хацунэ, на выводе строка типа Мику Х.
     // const fullNameShort = (name, lastName)=> {
@@ -35,7 +36,7 @@ const Users = (props) => {
                                 </NavLink>
                             </div>
                             <div className={style.butt}>
-                                {user.follower ? <button onClick={() => { props.unfollow(user.id) }}>Отписаться</button> : <button onClick={() => { props.follow(user.id) }}>Подписаться</button>}
+                                {user.followed ? <button disabled={props.usersPage.followUnfollowProgress.some(id =>id===user.id)} onClick={() => { props.unfollow(user.id) }}>Отписаться</button> : <button disabled={props.usersPage.followUnfollowProgress.some(id =>id===user.id)} onClick={() => { props.follow(user.id) }}>Подписаться</button>}
                             </div>
                         </div>
                         <div className={style.user}>
