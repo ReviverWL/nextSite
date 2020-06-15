@@ -9,6 +9,7 @@ import Music from './components/Music/Music';
 import News from './components/News/News';
 import Settings from './components/Settings/Settings';
 import UsersContainer from './components/Users/UsersContainer'
+import Login from './components/Login/login';
 
 
 const App = (props) => {
@@ -24,6 +25,7 @@ const App = (props) => {
         <Route path='/ミク' render = {()=><Music />} />
         <Route path='/users' render = {()=><UsersContainer />} />
         <Route path='/settings' render = {()=><Settings />} />
+        <Route path='/authentification' render ={()=><Login/>}/>
       </div>
     </HashRouter>
 

@@ -1,12 +1,14 @@
 import React from 'react'
-import { connect } from "react-redux"
-import Profile from "./Profile"
+import { connect } from 'react-redux'
+import Profile from './Profile'
+import {withLoginRedirect} from './../../hoc/withLoginRediect'
 import { setUserData} from '../../redux/profile-reduser'
 import Preloader from '../../utility_components/Preloader'
 import { withRouter } from 'react-router-dom'
+import { compose } from 'redux'
 
 
-class ProfileCont extends React.Component {
+class ProfileContainer extends React.Component {
     componentDidMount(){
         let userId = !this.props.match.params.userId ? 8318: this.props.match.params.userId
         this.props.setUserData(userId)
@@ -24,6 +26,11 @@ const mapStateToProps=(state)=>{
     }
 }
 
-const ProfileURL = withRouter(ProfileCont)
-const ProfileContainer = connect(mapStateToProps, {setUserData})(ProfileURL)
-export default ProfileContainer
+// const ProfileURL = withRouter(ProfileCont)
+// connect(mapStateToProps, {setUserData})(ProfileURL)
+export default compose(
+    connect(mapStateToProps, {setUserData}),
+    withRouter,
+    withLoginRedirect,
+
+)(ProfileContainer)
