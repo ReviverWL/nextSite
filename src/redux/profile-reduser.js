@@ -1,3 +1,6 @@
+import {profileDAL} from '../api/api'
+import {fetchStatus} from './users-reduser'
+
 const ADD_POST = 'ADD-POST'
 const TEXTFLOW_CHANGE = 'TEXTFLOW-CHANGE'
 const PROFILE_CHANGE = 'PROFILE_CHANGE'
@@ -41,5 +44,15 @@ const profileReduser = (state = initialState, action) => {
 export const addPost = () => ({ type: ADD_POST })
 export const textflow = (text) => ({ type: TEXTFLOW_CHANGE, text })
 export const profileInfo = (info) => ({ type: PROFILE_CHANGE, info })
+
+export const setUserData = (userId)=>{
+    return (dispatch)=>{
+        dispatch(fetchStatus(true))
+        profileDAL.getUsersData(userId).then(data=>{
+            dispatch(profileInfo(data))
+            dispatch(fetchStatus(false))
+        })
+    }
+}
 
 export default profileReduser

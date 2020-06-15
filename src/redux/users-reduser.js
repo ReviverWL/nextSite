@@ -1,3 +1,5 @@
+import {usersDAL} from '../api/api'
+
 const FOLLOW = 'FOLLOW'
 const UNFOLLOW = 'UNFOLLOW'
 const SET_USERS = 'SET_USERS'
@@ -13,7 +15,7 @@ let initialState={
         // {id: 3, name: 'Элли', lastName: 'Кавай', follower:true , status: 'Посылаю всех на...видео с ответами)', avatar: '', dislocation:{country: 'Россия',　city: 'Создатель сайта не вдавался в такие подробности'}},
         // {id: 4, name: 'Reviver', lastName: 'WLM', follower:false , status: 'Бункер Save Us', avatar: '', dislocation:{country: 'Вакуум',　city: 'Амёба'}}
     ],
-    pages: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+    pages: [],
     usersCount: 0,
     pageSize: 20,
     stepAside: 4, //кол-во страниц по бокам относительно выделенной
@@ -29,9 +31,8 @@ const usersReduser = (state = initialState, action) => {
             return {
                 ...state,
                 followUnfollowProgress: action.progress ? [...state.followUnfollowProgress, action.id]
-                :[...state.followUnfollowProgress.filter(id => id != action.id)]
+                    : [...state.followUnfollowProgress.filter(id => id != action.id)]
             }
-
         case FOLLOW:
             return {
                 ...state,
@@ -51,21 +52,21 @@ const usersReduser = (state = initialState, action) => {
                 )
             }
         case SET_USERS:
-            return{
+            return {
                 ...state, users: action.users
-        }
+            }
         case SET_USERS_COUNT:
-            return{
+            return {
                 ...state, usersCount: action.usersCount
-        }
+            }
         case IS_FETCH_STATUS:
-            return{
+            return {
                 ...state, isFetch: action.isFetch
-        }
+            }
 
         case CHANGE_PAGE:
             let stateCopy = { ...state }
-            let pagesCount = Math.ceil (stateCopy.usersCount / stateCopy.pageSize)
+            let pagesCount = Math.ceil(stateCopy.usersCount / stateCopy.pageSize)
             stateCopy.currentPage = action.currentPage
             stateCopy.pages = [...state.pages]
             // debugger
@@ -75,7 +76,7 @@ const usersReduser = (state = initialState, action) => {
                 for (let i = 1; i < 10; i++) {
                     stateCopy.pages.push(i)
                 }
-            } 
+            }
             else if (stateCopy.currentPage >= 6 && stateCopy.currentPage <= pagesCount - stateCopy.stepAside) {//логика страниц в центре(тех, что при активации изменяют номера страниц) не считая последние
                 const startCounter = stateCopy.currentPage - stateCopy.stepAside
                 const endCounter = stateCopy.currentPage + stateCopy.stepAside
@@ -83,14 +84,14 @@ const usersReduser = (state = initialState, action) => {
                     stateCopy.pages.push(i)
                 }
             }
-            else if (stateCopy.currentPage > pagesCount - stateCopy.stepAside && stateCopy.currentPage<= pagesCount) {//фиксированное кол-во страниц
+            else if (stateCopy.currentPage > pagesCount - stateCopy.stepAside && stateCopy.currentPage <= pagesCount) {//фиксированное кол-во страниц
                 for (let i = pagesCount - stateCopy.stepAside * 2; i <= pagesCount; i++) {
                     stateCopy.pages.push(i)
                 }
             }
             else if (stateCopy.currentPage <= 0 || stateCopy.currentPage > pagesCount) {
                 alert("Такой страницы не существует. Введите корректный номер страницы.")
-            }            
+            }
             else {
                 alert("Что-то пошло не так. Данные отображаются некорректно. Свяжитесь с администратором")//Место для try/catch
             }
@@ -124,6 +125,44 @@ export const follow = (id)=>{
 }
 export const unfollow = (id)=>{
     return{type: UNFOLLOW, id}
+}
+
+export const setUsersData = (currentPage, pageSize)=>{
+    return (dispatch)=>{
+        dispatch(fetchStatus(true))
+        dispatch(changePage(currentPage))
+            usersDAL.getUsers(currentPage, pageSize)
+            .then(data => {
+                dispatch(setUsers(data.items))
+                dispatch(setUsersCount(data.totalCount))
+                dispatch(fetchStatus(false))
+            })
+    }
+}
+
+export const setFollow = (id)=>{
+    return (dispatch)=>{
+        dispatch(followUnfollowProgress(true, id))
+        usersDAL.follow(id).then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(follow(id))
+                    alert('Вы подписались на ' + id)}
+                else {alert('Ошибка' + data.messages)}
+                dispatch(followUnfollowProgress(false, id))
+            })
+    }
+}
+export const setUnfollow = (id)=>{
+    return (dispatch)=>{
+        dispatch(followUnfollowProgress(true, id))
+        usersDAL.unfollow(id).then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(unfollow(id))
+                    alert('Вы отписались от ' + id)}
+                    else {alert('Ошибка' + data.messages)}
+                dispatch(followUnfollowProgress(false, id))
+            })
+    }
 }
 
 export default usersReduser
