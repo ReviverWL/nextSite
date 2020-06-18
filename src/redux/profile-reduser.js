@@ -4,6 +4,7 @@ import {fetchStatus} from './users-reduser'
 const ADD_POST = 'ADD-POST'
 const TEXTFLOW_CHANGE = 'TEXTFLOW-CHANGE'
 const PROFILE_CHANGE = 'PROFILE_CHANGE'
+const SET_STATUS = 'SET_STATUS'
 
 let initialState = {
 
@@ -13,7 +14,8 @@ let initialState = {
         { id: 3, text: 'nyao', likes: 1024 },
     ],
     textflowPost: '',
-    profileInfo: null
+    profileInfo: null,
+    status:''
 }
 
 const profileReduser = (state = initialState, action) => {
@@ -36,6 +38,9 @@ const profileReduser = (state = initialState, action) => {
             stateCopy.profileInfo = action.info
             return stateCopy
         }
+        case SET_STATUS:{
+            return{...state,status : action.status}
+        }
         default:
             return state
     }
@@ -44,6 +49,7 @@ const profileReduser = (state = initialState, action) => {
 export const addPost = () => ({ type: ADD_POST })
 export const textflow = (text) => ({ type: TEXTFLOW_CHANGE, text })
 export const profileInfo = (info) => ({ type: PROFILE_CHANGE, info })
+export const setStatus = (status) => ({type: SET_STATUS, status})
 
 export const setUserData = (userId)=>{
     return (dispatch)=>{
@@ -51,6 +57,22 @@ export const setUserData = (userId)=>{
         profileDAL.getUsersData(userId).then(data=>{
             dispatch(profileInfo(data))
             dispatch(fetchStatus(false))
+        })
+    }
+}
+export const getUserStatus = (userId)=>{
+    return(dispatch)=>{
+        profileDAL.getUserStatus(userId).then(data=>{
+            dispatch(setStatus(data))
+        })
+    }
+}
+export const setNewStatus = (status)=>{
+    return (dispatch)=>{
+        profileDAL.putUserStatus(status).then(data=>{
+            if(data.resultCode === 0){
+                dispatch(setStatus(status))
+            }
         })
     }
 }

@@ -1,10 +1,10 @@
 .ava img{
-  width: 45%;
-  height:45%;
+  width: 75%;
+  height:75%;
   border-radius: 50%;
 }
 .ava{ 
   background-color: chartreuse;
   text-align: center;
-  align-self: center;
+  /* align-self: center; */
 }
