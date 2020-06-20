@@ -10,6 +10,10 @@
   text-align: right;
 }
 
+.quitButton{
+  cursor: pointer;
+}
+
 .myHeader img{
     height: 100px;
     width: 100px;

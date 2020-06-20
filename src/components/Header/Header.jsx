@@ -13,7 +13,7 @@ const Header = (props) => {
                         <>
                         <div>{props.login}</div>
                         <div>{props.email}</div>
-                        <a onClick={props.logout}>quit</a>
+                        <a className={style.quitButton} onClick={props.logout}>quit</a>
                         </> :
                         <NavLink to='/authentification'>login</NavLink>}
                 </div>

@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import Profile from './Profile'
 import {withLoginRedirect} from './../../hoc/withLoginRediect'
-import { setUserData, getUserStatus, setNewStatus} from '../../redux/profile-reduser'
+import { setUserData, getUserStatus, setNewStatus, addPost} from '../../redux/profile-reduser'
 import Preloader from '../../utility_components/Preloader'
 import { withRouter } from 'react-router-dom'
 import { compose } from 'redux'
@@ -30,7 +30,7 @@ const mapStateToProps=(state)=>{
 // const ProfileURL = withRouter(ProfileCont)
 // connect(mapStateToProps, {setUserData})(ProfileURL)
 export default compose(
-    connect(mapStateToProps, {setUserData,getUserStatus,setNewStatus}),
+    connect(mapStateToProps, {setUserData,getUserStatus,setNewStatus,addPost}),
     withRouter,
-    withLoginRedirect,
+    // withLoginRedirect,
 )(ProfileContainer)

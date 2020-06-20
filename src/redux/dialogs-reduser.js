@@ -1,3 +1,5 @@
+const ADD_MESSAGE = 'ADD_MESSAGE'
+
 let initialState = {
     users : [
     { id:'01', name:'Miku', group: 'vocaloid',}, 
@@ -16,7 +18,18 @@ let initialState = {
 }
 
 const dialogsReduser=(state = initialState, action)=>{
-    return state
+    switch(action.type){
+        case ADD_MESSAGE:{
+            let newMessage = {id: state.messages.length + 1, message: action.message}
+            let stateCopy = {...state}
+            stateCopy.messages = [...state.messages, newMessage]
+            return stateCopy
+        }
+        default:
+            return state
+    }
 }
+
+export const addMessage = (message)=>({type:ADD_MESSAGE, message})
 
 export default dialogsReduser

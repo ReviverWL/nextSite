@@ -2,7 +2,6 @@ import {profileDAL} from '../api/api'
 import {fetchStatus} from './users-reduser'
 
 const ADD_POST = 'ADD-POST'
-const TEXTFLOW_CHANGE = 'TEXTFLOW-CHANGE'
 const PROFILE_CHANGE = 'PROFILE_CHANGE'
 const SET_STATUS = 'SET_STATUS'
 
@@ -13,7 +12,6 @@ let initialState = {
         { id: 2, text: 'azazazazaaza', likes: 10 },
         { id: 3, text: 'nyao', likes: 1024 },
     ],
-    textflowPost: '',
     profileInfo: null,
     status:''
 }
@@ -21,16 +19,9 @@ let initialState = {
 const profileReduser = (state = initialState, action) => {
     switch (action.type) {
         case ADD_POST:{
-            let newPost = { id: state.posts.length + 1, text: state.textflowPost, likes: 0 }
+            let newPost = { id: state.posts.length + 1, text: action.postText, likes: 0 };
             let stateCopy = { ...state }
-            stateCopy.posts = [...state.posts]
-            stateCopy.posts.push(newPost)
-            stateCopy.textflowPost = ''
-            return stateCopy
-        }
-        case TEXTFLOW_CHANGE:{
-            let stateCopy = { ...state }
-            stateCopy.textflowPost = action.text
+            stateCopy.posts = [...state.posts, newPost]
             return stateCopy
         }
         case PROFILE_CHANGE:{
@@ -39,15 +30,16 @@ const profileReduser = (state = initialState, action) => {
             return stateCopy
         }
         case SET_STATUS:{
-            return{...state,status : action.status}
+            return{
+                ...state,
+                status : action.status}
         }
         default:
             return state
     }
 }
 
-export const addPost = () => ({ type: ADD_POST })
-export const textflow = (text) => ({ type: TEXTFLOW_CHANGE, text })
+export const addPost = (postText) => ({ type: ADD_POST, postText })
 export const profileInfo = (info) => ({ type: PROFILE_CHANGE, info })
 export const setStatus = (status) => ({type: SET_STATUS, status})
 

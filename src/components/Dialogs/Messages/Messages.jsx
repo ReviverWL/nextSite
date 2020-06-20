@@ -1,15 +1,13 @@
 import React from 'react';
 import colored from './Saya.module.css'
-
-let batonchik = React.createRef();
-let ourPoem = ()=> alert(batonchik.current.value);
-
-
+import MessagesForm from './MessagesForm';
 
 const Messages = (props) => {
-
+    const sendMessage = (data)=>{
+        props.addMessage(data.message)
+    }
     let star = props.messages.map((mess) => {
-        if (mess.id === 4 || mess.id === 1) {
+        if (mess.id === 1 || mess.id === 4) {
         return <div className={colored.vocaloid}>{mess.message}</div>;
         }
         else {
@@ -20,10 +18,7 @@ const Messages = (props) => {
     return (
         <div>
             <div>{star}</div>
-            <div>
-                <textarea ref={batonchik}></textarea>
-                <button onClick={ourPoem}>Батончик</button>
-            </div>
+            <MessagesForm onSubmit={sendMessage}/>
         </div>
     )
 }
