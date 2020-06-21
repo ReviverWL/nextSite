@@ -7,7 +7,6 @@ import Preloader from '../../utility_components/Preloader'
 import { withRouter } from 'react-router-dom'
 import { compose } from 'redux'
 
-
 class ProfileContainer extends React.Component {
     componentDidMount(){
         let userId = !this.props.match.params.userId ? 8318: this.props.match.params.userId
@@ -27,10 +26,8 @@ const mapStateToProps=(state)=>{
     }
 }
 
-// const ProfileURL = withRouter(ProfileCont)
-// connect(mapStateToProps, {setUserData})(ProfileURL)
 export default compose(
     connect(mapStateToProps, {setUserData,getUserStatus,setNewStatus,addPost}),
     withRouter,
-    // withLoginRedirect,
+    withLoginRedirect,
 )(ProfileContainer)
