@@ -7,6 +7,6 @@
 .error .message textarea{
     border: solid red 3px
 }
-span{
+.error span{
     color: red
 }

@@ -9,7 +9,7 @@ import { compose } from 'redux'
 
 class ProfileContainer extends React.Component {
     componentDidMount(){
-        let userId = !this.props.match.params.userId ? 8318: this.props.match.params.userId
+        let userId = !this.props.match.params.userId ? this.props.userId: this.props.match.params.userId
         this.props.getUserStatus(userId)
         this.props.setUserData(userId)
     }
@@ -23,6 +23,7 @@ const mapStateToProps=(state)=>{
     return{
         profilePage: state.profilePage,
         isFetch: state.usersPage.isFetch,
+        userId: state.auth.id
     }
 }
 

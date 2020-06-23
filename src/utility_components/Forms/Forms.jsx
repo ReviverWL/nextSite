@@ -14,10 +14,10 @@ export const Textarea = ({input, meta, ...props}) => {
         </div>
     )
 }
-export const Input = () => {
+export const Input = ({input, meta, ...props}) => {
     return (
         <div className={style.forData + style.error}>
-            <input />
+            <input {...input}{...props}/>
             <span></span>
         </div>
     )

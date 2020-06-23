@@ -7,20 +7,21 @@ import { Redirect } from 'react-router-dom'
 
 const Login = (props) =>{
     let onLogin = (userData)=>{
-        props.loginOnSite(userData.email, userData.password, userData.rememberMe)
+        props.loginOnSite(userData.email, userData.password, userData.rememberMe, userData.checkCaptcha)
     }
     return props.authStatus
         ?<Redirect to='/profile'/>
         : <div>
         <h2>Login</h2>
-        <LoginForm onSubmit={onLogin}/>
+        <LoginForm captcha={props.captcha} onSubmit={onLogin}/>
         </div>
     
 }
 
 const mapStateToProps = (state)=>{
     return {
-        authStatus: state.auth.authStatus
+        authStatus: state.auth.authStatus,
+        captcha: state.auth.captcha
     }
 }
 export default compose(

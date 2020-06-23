@@ -2,12 +2,14 @@ import { fetchStatus } from './users-reduser'
 import {authDAL} from '../api/api'
 
 const SET_CURRENT_USER = 'SET_CURRENT_USER'
+const CAPTCHA = 'CAPTCHA'
 
 let initialState = {
     id:null,
     email:null,
     login:null,
     authStatus: false,
+    captcha: ''
 }
 
 const authReduser = (state = initialState, action) => {
@@ -17,6 +19,13 @@ const authReduser = (state = initialState, action) => {
                 ...state,
                 ...action.authUserData
             }
+        case CAPTCHA:{
+            return{
+                ...state,
+                captcha: action.captcha
+            }
+
+        }
         default:
             return state
     }
@@ -24,6 +33,9 @@ const authReduser = (state = initialState, action) => {
 
 export const setCurrentUser = (id, email, login, authStatus)=>{
     return{type: SET_CURRENT_USER, authUserData:{id, email, login, authStatus}}
+}
+const setCaptcha = (captcha)=>{
+    return{type: CAPTCHA, captcha}
 }
 
 export const getConfirmedUserData = ()=>{
@@ -39,13 +51,29 @@ export const getConfirmedUserData = ()=>{
         })}
 }
 
-export const loginOnSite = (email, password, rememberMe)=>{
+export const loginOnSite = (email, password, rememberMe, captchaValue)=>{
     return(dispatch)=>{
-        authDAL.authentication(email, password, rememberMe)
+        authDAL.authentication(email, password, rememberMe, captchaValue)
         .then(data=>{
             if(data.resultCode ===  0){
             dispatch(getConfirmedUserData())
-        }})
+            }
+            else if(data.resultCode === 10){
+                dispatch(captcha())
+            }
+            else{
+                return data.messages[0]
+            }
+        })
+    }
+}
+
+export const captcha = ()=>{
+    return(dispatch)=>{
+        authDAL.getCaptcha()
+        .then(data=>{
+            dispatch(setCaptcha(data.url))
+        })
     }
 }
 
@@ -55,7 +83,8 @@ export const logoutFromSite = ()=>{
     .then(data=>{
         if(data.resultCode === 0){
             dispatch(setCurrentUser(null, null, null, false))
-        }})
+        }
+    })
     }
 }
 

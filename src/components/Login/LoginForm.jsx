@@ -1,6 +1,8 @@
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { compose } from 'redux'
+import { Input } from '../../utility_components/Forms/Forms'
+import style from './LoginForm.module.css'
 
 const LoginForm = (props) =>{
     return(
@@ -14,6 +16,14 @@ const LoginForm = (props) =>{
             <div>'Запомнить меня'
                 <Field name='rememberMe' component='input' type='checkbox' />
             </div>
+                <div className={ props.captcha === '' ? style.captchaOff : style.captchaOn}>
+                    <div>
+                        <img src={props.captcha} alt='Капча не загрузилась. Пожалуйста перезагрузите страницу' />
+                    </div>
+                    <div>
+                        <Field name='checkCaptcha' component={Input} />
+                    </div>
+                </div>
             <div>
                 <button>Нажми на меня ;)</button>
             </div>
