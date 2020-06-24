@@ -1,5 +1,6 @@
 import { fetchStatus } from './users-reduser'
 import {authDAL} from '../api/api'
+import { stopSubmit } from 'redux-form'
 
 const SET_CURRENT_USER = 'SET_CURRENT_USER'
 const CAPTCHA = 'CAPTCHA'
@@ -58,11 +59,15 @@ export const loginOnSite = (email, password, rememberMe, captchaValue)=>{
             if(data.resultCode ===  0){
             dispatch(getConfirmedUserData())
             }
+            else if(data.resultCode === 1){
+                dispatch(stopSubmit('Login', {_error: data.messages}))
+            }
             else if(data.resultCode === 10){
+                dispatch(stopSubmit('Login', {_error: data.messages}))
                 dispatch(captcha())
             }
             else{
-                return data.messages[0]
+                return data.messages
             }
         })
     }
