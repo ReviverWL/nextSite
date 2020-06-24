@@ -11,11 +11,11 @@ const Header = (props) => {
                 <div className={style.currentUser}>
                     {props.authStatus ?
                         <>
-                        <div>{props.login}</div>
+                        <div>{props.login}<span className={style.quitButton} onClick={props.logout}>выход</span></div>
                         <div>{props.email}</div>
-                        <a className={style.quitButton} onClick={props.logout}>quit</a>
+                        
                         </> :
-                        <NavLink to='/authentification'>login</NavLink>}
+                        <NavLink to='/authentification'>логин</NavLink>}
                 </div>
             </div>
         </header>

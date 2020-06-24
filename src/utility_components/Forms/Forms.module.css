@@ -4,7 +4,8 @@
 .forData{
 
 }
-.error .message textarea{
+.error .message{
+    display: inline-flex;
     border: solid red 3px
 }
 .error span{

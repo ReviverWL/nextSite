@@ -12,6 +12,7 @@
 
 .quitButton{
   cursor: pointer;
+  padding-left: 15px;
 }
 
 .myHeader img{

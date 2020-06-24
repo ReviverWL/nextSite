@@ -1,39 +1,35 @@
-import React from 'react';
+import React from 'react'
+import StatusForm from './StatusForm'
 
 //нужна доп проверка на профиль текущего пользователя
 class Status extends React.Component{
     state = {
         editor: false,
-        status: this.props.status
     }
-    editorMode = ()=>{
+    editorMode = (newStatus)=>{
         let editor = !this.state.editor
         if(!editor){
-            this.props.setNewStatus(this.state.status)
+            this.props.setNewStatus(newStatus.status)
         }
         this.setState({
             editor
         })
+
     }
-    textflowStatus = (e)=>{
-        this.setState({
-            status: e.currentTarget.value
-        })
-    }
-   
-    componentDidUpdate(prevProps, prevState){
-        if(prevProps.status !== this.props.status){
-            this.setState({
-                status: this.props.status
-            })
-        }
-    }
+    // componentDidUpdate(prevProps, prevState){
+    //     if(prevProps.status !== this.props.status){
+    //         this.setState({
+    //             status: this.props.status
+    //         })
+    //     }
+    // }
     render(){
+        debugger
         return(
             <div>
             {
             this.state.editor
-                ?<input type="text" onChange={this.textflowStatus} autoFocus={true} onBlur={this.editorMode} value={this.state.status}/>
+                ?<StatusForm status={this.props.status} onSubmit={this.editorMode}/>
                 :<span onDoubleClick={this.editorMode}>{this.props.status || 'Ваш статус'}</span>
             }
             </div>

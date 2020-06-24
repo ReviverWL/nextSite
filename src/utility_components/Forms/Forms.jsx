@@ -6,19 +6,30 @@ export const Textarea = ({input, meta, ...props}) => {
     return (
         <div className={isError ? style.error : ''}>
             <div className={style.message}>
-            <textarea {...input}{...props} />
+            <textarea {...input}{...props} 
+            onKeyPress={event => {
+                if (event.key === "Enter") {
+                    props.addPost()
+                    event.preventDefault()
+                }
+            }} />
             </div>
             <div>
-            {isError && <span>{meta.error}</span>}
+            {isError && <span className={style.error}>{meta.error}</span>}
             </div>
         </div>
     )
 }
 export const Input = ({input, meta, ...props}) => {
+    const isError = meta.touched && meta.error
     return (
-        <div className={style.forData + style.error}>
-            <input {...input}{...props}/>
-            <span></span>
+        <div className={isError ? style.error : ''}>
+            <div className={style.message}>
+            <input {...input}{...props} />
+            </div>
+            <div>
+            {isError && <span className={style.error}>{meta.error}</span>}
+            </div>
         </div>
     )
 }
