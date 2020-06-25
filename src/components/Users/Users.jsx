@@ -4,8 +4,6 @@ import out_of_photo from '../../assets/out_of_photo.jpg'
 import { NavLink } from 'react-router-dom'
 
 const Users = (props) => {
-    // debugger
-    let ss = React.createRef()
     //Подаём 2 строки типа Мику Хацунэ, на выводе строка типа Мику Х.
     // const fullNameShort = (name, lastName)=> {
     //     let shortLastName = lastName.split('', 1)

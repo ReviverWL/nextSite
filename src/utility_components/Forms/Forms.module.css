@@ -4,6 +4,9 @@
 .captchaOff{
     display: none;
 }
+.inlineCheckbox{
+    display: inline-block
+}
 .formError{
     display: inline-block;
     border: solid red 2px;
@@ -12,7 +15,7 @@
 .error{
     color: red
 }
-.error .message{
+.error .message input{
     display: inline-block;
     border: solid red 3px
 }

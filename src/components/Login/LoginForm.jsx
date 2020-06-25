@@ -15,7 +15,7 @@ const LoginForm = (props) =>{
                 <Field name='password' placeholder='Пароль' component={Input} type='password' validate={[requiredField]}/>
             </div>
             <div>
-                <span>Запомнить меня</span><Field name='rememberMe' component={Input} type='checkbox' />
+                <Field name='rememberMe' component='input' type='checkbox'/><span>Запомнить меня</span>
             </div>
             <div className={ props.captcha === '' ? style.captchaOff : style.captchaOn}>
                     <div>

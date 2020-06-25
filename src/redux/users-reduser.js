@@ -31,7 +31,7 @@ const usersReduser = (state = initialState, action) => {
             return {
                 ...state,
                 followUnfollowProgress: action.progress ? [...state.followUnfollowProgress, action.id]
-                    : [...state.followUnfollowProgress.filter(id => id != action.id)]
+                    : [...state.followUnfollowProgress.filter(id => id !== action.id)]
             }
         case FOLLOW:
             return {
@@ -69,7 +69,6 @@ const usersReduser = (state = initialState, action) => {
             let pagesCount = Math.ceil(stateCopy.usersCount / stateCopy.pageSize)
             stateCopy.currentPage = action.currentPage
             stateCopy.pages = [...state.pages]
-            // debugger
             stateCopy.pages.length = 0
             if (stateCopy.currentPage >= 1 && stateCopy.currentPage <= 5) { //страницы с 1 по 9
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { compose } from 'redux'
-import { reduxForm, Field, getFormInitialValues } from 'redux-form'
+import { reduxForm, Field } from 'redux-form'
 import {Textarea} from '../../../utility_components/Forms/Forms'
 import { maxLength, requiredMessage } from '../../../utility_components/Forms/validators'
 
