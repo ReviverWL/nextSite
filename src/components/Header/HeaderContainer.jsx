@@ -14,7 +14,6 @@ const mapStateToProps=(state)=>{
         login: state.auth.login,
         email: state.auth.email,
         authStatus: state.auth.authStatus,
-        // initialisation: state.app
     }
 }
 

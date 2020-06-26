@@ -9,13 +9,12 @@ const Header = (props) => {
             <div className={style.divider}>
                 <img src='https://say-hi.me/wp-content/uploads/2018/07/mozilla-logos-1.png' alt="none" />
                 <div className={style.currentUser}>
-                    {props.authStatus ?
-                        <>
+                    {props.authStatus
+                    ?<>
                         <div>{props.login}<span className={style.quitButton} onClick={props.logout}>выход</span></div>
                         <div>{props.email}</div>
-                        
-                        </> :
-                        <NavLink to='/authentification'>логин</NavLink>}
+                    </>
+                    :<NavLink to='/authentification'>логин</NavLink>}
                 </div>
             </div>
         </header>

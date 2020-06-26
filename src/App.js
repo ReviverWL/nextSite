@@ -13,12 +13,18 @@ import Login from './components/Login/Login'
 import {getConfirmedUserData} from './redux/auth-reduser'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
+import Preloader from './utility_components/Preloader'
+import {changeReadiness} from './redux/main-reduser'
 
 class App extends React.Component {
   componentDidMount() {
-    this.props.getConfirmedUserData()
+    this.props.changeReadiness()
+    // this.props.getConfirmedUserData()
   }
   render() {
+    if(!this.props.readiness){
+      return <Preloader/>
+    }
     return (
       <HashRouter>
         <div className={style.appWrapper}>
@@ -39,11 +45,11 @@ class App extends React.Component {
 
 const mapStateToProps = (state)=>{
   return{
-    authStatus: state.auth.authStatus
+    readiness: state.core.readiness
   }
 }
 
 export default compose(
-  connect(mapStateToProps, {getConfirmedUserData}),
-  withRouter
+  withRouter,
+  connect(mapStateToProps, {getConfirmedUserData, changeReadiness}),
 )(App)

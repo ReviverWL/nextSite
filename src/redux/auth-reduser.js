@@ -39,17 +39,19 @@ const setCaptcha = (captcha)=>{
     return{type: CAPTCHA, captcha}
 }
 
-export const getConfirmedUserData = ()=>{
-    return (dispatch) =>{
+export const getConfirmedUserData = () => {
+    return (dispatch) => {
         dispatch(fetchStatus(true))
-        authDAL.confirmedUserData()
-        .then(data=>{
-            if (data.resultCode === 0) {
-                let { id, email, login } = data.data;
-                dispatch(setCurrentUser(id, email, login, true))
-            }
-            dispatch(fetchStatus(false))
-        })}
+        return (authDAL.confirmedUserData()
+            .then(data => {
+                if (data.resultCode === 0) {
+                    let { id, email, login } = data.data;
+                    dispatch(setCurrentUser(id, email, login, true))
+                }
+                dispatch(fetchStatus(false))
+            })
+        )
+    }
 }
 
 export const loginOnSite = (email, password, rememberMe, captchaValue)=>{
