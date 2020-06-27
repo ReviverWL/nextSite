@@ -1,0 +1,1 @@
+export const authStatus = state => state.auth.authStatus

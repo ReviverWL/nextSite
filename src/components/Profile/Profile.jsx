@@ -7,7 +7,6 @@ import ProfileInfo from './ProrileInfo/ProfileInfo';
 import Preloader from '../../utility_components/Preloader';
 
 const Profile = (props) => {
-    debugger
     return (
     <div className={profile.mainProfile}>
         <Statbar />

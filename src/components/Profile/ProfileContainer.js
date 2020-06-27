@@ -4,12 +4,23 @@ import Profile from './Profile'
 import {withLoginRedirect} from './../../hoc/withLoginRediect'
 import { setUserData, getUserStatus, setNewStatus, addPost} from '../../redux/profile-reduser'
 import Preloader from '../../utility_components/Preloader'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Redirect } from 'react-router-dom'
 import { compose } from 'redux'
 
 class ProfileContainer extends React.Component {
     componentDidMount(){
-        let userId = !this.props.match.params.userId ? this.props.userId: this.props.match.params.userId
+        debugger
+        let userId
+        if(!this.props.match.params.userId){
+            userId = this.props.userId
+            if(!userId){
+                this.props.history.push('/authentification' )
+            }
+        }
+        else{
+            userId = this.props.match.params.userId
+        }
+        // let userId = !this.props.match.params.userId ? (this.props.userId?this.props.userId:<Redirect/> ): this.props.match.params.userId
         this.props.getUserStatus(userId)
         this.props.setUserData(userId)
     }
@@ -30,5 +41,5 @@ const mapStateToProps=(state)=>{
 export default compose(
     connect(mapStateToProps, {setUserData,getUserStatus,setNewStatus,addPost}),
     withRouter,
-    withLoginRedirect,
+    // withLoginRedirect,
 )(ProfileContainer)
