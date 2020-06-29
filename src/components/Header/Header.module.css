@@ -2,6 +2,23 @@
     grid-column: 1/3;
   }
 
+.authUserInfo{
+  position: relative;
+}
+
+.showAdditionalUserData{
+  position: absolute;
+  right: 0px;
+  bottom: 3px;
+  background-color: yellow;
+  border-radius: 7px;
+}
+
+.hideAdditionalUserData{
+  position: absolute;
+  display: none;
+}
+
 .divider{
   display: grid;
   grid-template-columns: 100px 1fr;
@@ -12,7 +29,6 @@
 
 .quitButton{
   cursor: pointer;
-  padding-left: 15px;
 }
 
 .myHeader img{
