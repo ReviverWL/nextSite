@@ -8,8 +8,8 @@ const CAPTCHA = 'CAPTCHA'
 let initialState = {
     id:null,
     email:null,
-    login:null,
-    authStatus: false,
+    authLogin:null,
+    isAuthUser: false,
     captcha: ''
 }
 
@@ -32,8 +32,8 @@ const authReduser = (state = initialState, action) => {
     }
 }
 
-export const setCurrentUser = (id, email, login, authStatus)=>{
-    return{type: SET_CURRENT_USER, authUserData:{id, email, login, authStatus}}
+export const setCurrentUser = (id, email, authLogin, isAuthUser)=>{
+    return{type: SET_CURRENT_USER, authUserData:{id, email, authLogin, isAuthUser}}
 }
 const setCaptcha = (captcha)=>{
     return{type: CAPTCHA, captcha}

@@ -9,7 +9,7 @@ const Login = (props) =>{
     let onLogin = (userData)=>{
         props.loginOnSite(userData.email, userData.password, userData.rememberMe, userData.checkCaptcha)
     }
-    return props.authStatus
+    return props.isAuthUser
         ?<Redirect to='/profile'/>
         : <div>
         <h2>Login</h2>
@@ -20,7 +20,7 @@ const Login = (props) =>{
 
 const mapStateToProps = (state)=>{
     return {
-        authStatus: state.auth.authStatus,
+        isAuthUser: state.auth.isAuthUser,
         captcha: state.auth.captcha
     }
 }

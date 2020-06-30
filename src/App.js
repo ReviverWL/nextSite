@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import HeaderContainer from './components/Header/HeaderContainer'
 import style from './App.module.css'
 import Sidebar from './components/Sidebar/Sidebar'
@@ -10,19 +10,17 @@ import News from './components/News/News'
 import Settings from './components/Settings/Settings'
 import UsersContainer from './components/Users/UsersContainer'
 import Login from './components/Login/Login'
-import {getConfirmedUserData} from './redux/auth-reduser'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import Preloader from './utility_components/Preloader'
 import {changeReadiness} from './redux/main-reduser'
 
-class App extends React.Component {
-  componentDidMount() {
-    this.props.changeReadiness()
-    // this.props.getConfirmedUserData()
-  }
-  render() {
-    if(!this.props.readiness){
+const App = ({readiness, changeReadiness}) => {
+  useEffect(()=>{
+    changeReadiness()
+  }, [readiness, changeReadiness])
+
+    if(!readiness){
       return <Preloader/>
     }
     return (
@@ -30,6 +28,7 @@ class App extends React.Component {
         <div className={style.appWrapper}>
           <HeaderContainer />
           <Sidebar />
+          <Route exaxt path='/' />
           <Route exact path='/profile/:userId?' render={() => <ProfileContainer />} />
           <Route path='/dialogs' render={() => <Dialogs />} />
           <Route path='/news' render={() => <News />} />
@@ -40,7 +39,6 @@ class App extends React.Component {
         </div>
       </HashRouter>
     )
-  }
 }
 
 const mapStateToProps = (state)=>{
@@ -51,5 +49,5 @@ const mapStateToProps = (state)=>{
 
 export default compose(
   withRouter,
-  connect(mapStateToProps, {getConfirmedUserData, changeReadiness}),
+  connect(mapStateToProps, {changeReadiness}),
 )(App)

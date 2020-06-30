@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Users from './Users'
 import Preloader from '../../utility_components/Preloader'
 import {setUsersData, setFollow, setUnfollow} from './../../redux/users-reduser'
@@ -7,27 +7,23 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 //split & join
 
-class UsersContainer extends React.Component {
-    componentDidMount(){
-        this.props.setUsersData(this.props.usersPage.currentPage, this.props.usersPage.pageSize)
-    }
-    setCurrentPage = (page)=>{
-        this.props.setUsersData(page, this.props.usersPage.pageSize)
-    }
-    
-    render(){
+const UsersContainer = ({usersPage, setUsersData, setFollow, setUnfollow})=> {
+    useEffect(()=>{
+        setUsersData(usersPage.currentPage, usersPage.pageSize)
+    }, [usersPage.currentPage, usersPage.pageSize])
+
         return<> 
-        {this.props.usersPage.isFetch ? <Preloader />:
+        {usersPage.isFetch ? <Preloader />:
         <Users 
-        usersPage={this.props.usersPage} 
-        follow={this.props.setFollow}
-        unfollow={this.props.setUnfollow}
-        setCurrentPage={this.setCurrentPage}/>}
+        usersPage={usersPage} 
+        follow={setFollow}
+        unfollow={setUnfollow}
+        setUsersData={setUsersData}
+        />}
         </>
 }
-}
 
-const mapStateToProps = (state) => {return{usersPage: state.usersPage}}
+const mapStateToProps = (state) => {return({usersPage: state.usersPage})}
 
 export default compose(
     connect(mapStateToProps, {setUsersData, setFollow, setUnfollow}),

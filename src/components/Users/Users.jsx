@@ -19,7 +19,7 @@ const Users = (props) => {
             }
             else {
             return <span className={style.pages}
-            onClick={() => { props.setCurrentPage(p) }}>{p}</span>}
+            onClick={() => { props.setUsersData(p) }}>{p}</span>}
 
         })}
         </div>

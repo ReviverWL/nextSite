@@ -8,7 +8,7 @@ const Ava = (props) => {
     return (
         <div className={ava.ava}>
             <img src={props.photo === null ?  out_of_photo: props.photo} alt='nani' />
-            <Status setNewStatus={props.setNewStatus} status={props.status} />
+            <Status setNewStatus={props.setNewStatus} />
         </div>
 
         )

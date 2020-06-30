@@ -1,1 +1,2 @@
-export const authStatus = state => state.auth.authStatus
+export const isAuthUser = state => state.auth.isAuthUser
+// export const 

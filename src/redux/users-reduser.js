@@ -126,16 +126,14 @@ export const unfollow = (id)=>{
     return{type: UNFOLLOW, id}
 }
 
-export const setUsersData = (currentPage, pageSize)=>{
-    return (dispatch)=>{
+export const setUsersData = (currentPage, pageSize) => {
+    return async (dispatch) => {
         dispatch(fetchStatus(true))
         dispatch(changePage(currentPage))
-            usersDAL.getUsers(currentPage, pageSize)
-            .then(data => {
-                dispatch(setUsers(data.items))
-                dispatch(setUsersCount(data.totalCount))
-                dispatch(fetchStatus(false))
-            })
+        const data = await usersDAL.getUsers(currentPage, pageSize)
+        dispatch(setUsers(data.items))
+        dispatch(setUsersCount(data.totalCount))
+        dispatch(fetchStatus(false))
     }
 }
 

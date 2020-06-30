@@ -6,28 +6,43 @@ import { setUserData, getUserStatus, setNewStatus, addPost} from '../../redux/pr
 import Preloader from '../../utility_components/Preloader'
 import { withRouter, Redirect } from 'react-router-dom'
 import { compose } from 'redux'
+import { useEffect } from 'react'
 
-class ProfileContainer extends React.Component {
-    componentDidMount(){
-        debugger
-        let userId
-        if(!this.props.match.params.userId){
-            userId = this.props.userId
+const ProfileContainer =({match, getUserStatus, setUserData, userId, history, isFetch, ...props})=> {
+    const setUser = (id)=>{
+        getUserStatus(id)
+        setUserData(id)
+    }
+    useEffect(()=>{
+        setUser(match.params.userId)
+        if(!match.params.userId){
+            setUser(userId)
             if(!userId){
-                this.props.history.push('/authentification' )
+                history.push('/authentification')
             }
         }
         else{
-            userId = this.props.match.params.userId
+            setUser(match.params.userId)
         }
-        // let userId = !this.props.match.params.userId ? (this.props.userId?this.props.userId:<Redirect/> ): this.props.match.params.userId
-        this.props.getUserStatus(userId)
-        this.props.setUserData(userId)
-    }
+    }, [match.params.userId, userId, history])
+    // componentDidMount(){
+    //     let userId
+    //     if(!this.props.match.params.userId){
+    //         userId = this.props.userId
+    //         if(!userId){
+    //             this.props.history.push('/authentification' )
+    //         }
+    //     }
+    //     else{
+    //         userId = this.props.match.params.userId
+    //     }
+    //     this.props.getUserStatus(userId)
+    //     this.props.setUserData(userId)
+    // }
 
-    render(){
-            return<>{this.props.isFetch ? <Preloader/>:<Profile {...this.props}/>} </>
-    }
+    // render(){
+            return<>{isFetch ? <Preloader/>:<Profile {...props}/>} </>
+    // }
 }
 
 const mapStateToProps=(state)=>{

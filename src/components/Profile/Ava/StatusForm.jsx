@@ -3,18 +3,26 @@ import { Input } from '../../../utility_components/Forms/Forms'
 import { Field, reduxForm } from 'redux-form'
 import { requiredStatus } from '../../../utility_components/Forms/validators'
 import { compose } from 'redux'
+import { connect } from 'react-redux'
 
-const StatusForm = (props)=>{
-    debugger
-        return(
-            <form onSubmit={props.handleSubmit}>
-            <Field name='status' autoFocus={true} component={Input} validate={[requiredStatus]}/><br/>
-            <button>Подтвердить</button>
-            </form>
-        )
+const StatusForm = ({handleSubmit, setEditorMode}) => {
+    return (
+        <form onSubmit={handleSubmit} >
+            <Field name='status' autoFocus={true} component={Input} validate={[requiredStatus]}  /><br />
+            <button type='button' onClick={()=>{setEditorMode(false)}}>Отмена</button><button>Подтвердить</button>
+        </form>
+    )
 
 }
-
+const mapStateToProps = (state)=>{
+    return{
+        initialValues:{status: state.profilePage.status}
+    }
+}
 export default compose(
-    reduxForm({form: 'Status'})
+    connect(mapStateToProps, {}),
+    reduxForm({form: 'Status'
+    }),
+    
+    
 )(StatusForm)

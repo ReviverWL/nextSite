@@ -11,7 +11,7 @@ const Profile = (props) => {
     <div className={profile.mainProfile}>
         <Statbar />
         {props.profilePage.profileInfo === null?<Preloader/>:<>
-        <Ava setNewStatus={props.setNewStatus} status={props.profilePage.status} photo={props.profilePage.profileInfo.photos.large}/>
+        <Ava setNewStatus={props.setNewStatus} photo={props.profilePage.profileInfo.photos.large}/>
         <ProfileInfo info={props.profilePage.profileInfo}/> 
         <MyPosts posts={props.profilePage.posts}
          addPost={props.addPost} textflow={props.textflow} textflowPost={props.profilePage.textflowPost}/></>}

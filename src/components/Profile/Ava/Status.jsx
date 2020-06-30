@@ -1,21 +1,24 @@
 import React from 'react'
 import StatusForm from './StatusForm'
+import { useState } from 'react'
 
 //нужна доп проверка на профиль текущего пользователя
-class Status extends React.Component{
-    state = {
-        editor: false,
+const Status = ({setNewStatus, status})=>{
+    const[editorMode, setEditorMode] = useState(false)
+    const onSubmitStatus = (data)=>{
+        setNewStatus(data.status)
+        setEditorMode(false)
     }
-    editorMode = (newStatus)=>{
-        let editor = !this.state.editor
-        if(!editor){
-            this.props.setNewStatus(newStatus.status)
-        }
-        this.setState({
-            editor
-        })
+    // if(editorMode){
 
-    }
+    // }
+    // else{
+
+    // }
+    // useEffect(()=>{
+      
+    // }, [])
+   
     // componentDidUpdate(prevProps, prevState){
     //     if(prevProps.status !== this.props.status){
     //         this.setState({
@@ -23,17 +26,15 @@ class Status extends React.Component{
     //         })
     //     }
     // }
-    render(){
         return(
             <div>
             {
-            this.state.editor
-                ?<StatusForm status={this.props.status} onSubmit={this.editorMode}/>
-                :<span onDoubleClick={this.editorMode}>{this.props.status || 'Ваш статус'}</span>
+            editorMode
+                ?<StatusForm status={status} setEditorMode={setEditorMode} onSubmit={onSubmitStatus}/>
+                :<span onDoubleClick={()=>{setEditorMode(true)}}>{status || 'Cтатус не установлен'}</span>
             }
             </div>
         )
-    }
 }
 
 export default Status
