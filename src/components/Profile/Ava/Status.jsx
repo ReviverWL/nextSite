@@ -9,28 +9,12 @@ const Status = ({setNewStatus, status})=>{
         setNewStatus(data.status)
         setEditorMode(false)
     }
-    // if(editorMode){
-
-    // }
-    // else{
-
-    // }
-    // useEffect(()=>{
-      
-    // }, [])
    
-    // componentDidUpdate(prevProps, prevState){
-    //     if(prevProps.status !== this.props.status){
-    //         this.setState({
-    //             status: this.props.status
-    //         })
-    //     }
-    // }
         return(
             <div>
             {
             editorMode
-                ?<StatusForm status={status} setEditorMode={setEditorMode} onSubmit={onSubmitStatus}/>
+                ?<StatusForm setEditorMode={setEditorMode} onSubmit={onSubmitStatus}/>
                 :<span onDoubleClick={()=>{setEditorMode(true)}}>{status || 'Cтатус не установлен'}</span>
             }
             </div>

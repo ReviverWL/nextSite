@@ -3,12 +3,12 @@ import out_of_photo from '../../../assets/out_of_photo.jpg'
 import ava from './Ava.module.css'
 import Status from './Status';
 
-const Ava = (props) => {
+const Ava = ({setNewStatus, status, photo}) => {
     
     return (
         <div className={ava.ava}>
-            <img src={props.photo === null ?  out_of_photo: props.photo} alt='nani' />
-            <Status setNewStatus={props.setNewStatus} />
+            <img src={photo === null ?  out_of_photo: photo} alt='nani' />
+            <Status setNewStatus={setNewStatus} status={status}/>
         </div>
 
         )

@@ -25,31 +25,15 @@ const ProfileContainer =({match, getUserStatus, setUserData, userId, history, is
             setUser(match.params.userId)
         }
     }, [match.params.userId, userId, history])
-    // componentDidMount(){
-    //     let userId
-    //     if(!this.props.match.params.userId){
-    //         userId = this.props.userId
-    //         if(!userId){
-    //             this.props.history.push('/authentification' )
-    //         }
-    //     }
-    //     else{
-    //         userId = this.props.match.params.userId
-    //     }
-    //     this.props.getUserStatus(userId)
-    //     this.props.setUserData(userId)
-    // }
-
-    // render(){
             return<>{isFetch ? <Preloader/>:<Profile {...props}/>} </>
-    // }
 }
 
 const mapStateToProps=(state)=>{
     return{
         profilePage: state.profilePage,
         isFetch: state.usersPage.isFetch,
-        userId: state.auth.id
+        userId: state.auth.id,
+        status: state.profilePage.status
     }
 }
 
