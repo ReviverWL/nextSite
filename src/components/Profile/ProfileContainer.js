@@ -1,31 +1,35 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import Profile from './Profile'
 import {withLoginRedirect} from './../../hoc/withLoginRediect'
-import { setUserData, getUserStatus, setNewStatus, addPost} from '../../redux/profile-reduser'
+import { setUserData, getUserStatus, setNewStatus, addPost, updateUserPhoto} from '../../redux/profile-reduser'
 import Preloader from '../../utility_components/Preloader'
 import { withRouter, Redirect } from 'react-router-dom'
 import { compose } from 'redux'
 import { useEffect } from 'react'
 
 const ProfileContainer =({match, getUserStatus, setUserData, userId, history, isFetch, ...props})=> {
+    const[abilityToChangeProfile, setAbilityToChangeProfile]= useState(false)
+    useEffect(()=>{
+        setUser(match.params.userId)
+        if (match.params.userId == userId || !match.params.userId) {
+                if (!userId) {
+                    history.push('/authentification')
+                }
+            setUser(userId)
+            setAbilityToChangeProfile(true)
+        }
+        else {
+            setUser(match.params.userId)
+            setAbilityToChangeProfile(false)
+        }
+    }, [match.params.userId, userId, history])
+
     const setUser = (id)=>{
         getUserStatus(id)
         setUserData(id)
     }
-    useEffect(()=>{
-        setUser(match.params.userId)
-        if(!match.params.userId){
-            setUser(userId)
-            if(!userId){
-                history.push('/authentification')
-            }
-        }
-        else{
-            setUser(match.params.userId)
-        }
-    }, [match.params.userId, userId, history])
-            return<>{isFetch ? <Preloader/>:<Profile {...props}/>} </>
+            return<>{isFetch ? <Preloader/>:<Profile {...props} abilityToChangeProfile={abilityToChangeProfile}/>} </>
 }
 
 const mapStateToProps=(state)=>{
@@ -38,7 +42,7 @@ const mapStateToProps=(state)=>{
 }
 
 export default compose(
-    connect(mapStateToProps, {setUserData,getUserStatus,setNewStatus,addPost}),
+    connect(mapStateToProps, {setUserData, getUserStatus, setNewStatus, addPost, updateUserPhoto}),
     withRouter,
     // withLoginRedirect,
 )(ProfileContainer)

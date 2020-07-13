@@ -44,6 +44,12 @@ export const profileDAL = {
     getUsersData(userId){
         return instance.get(`profile/${userId}`).then(response=>{return response.data} )
     },
+    async putUserPhoto(photoFile){
+        let formData = new FormData()
+        formData.append('image', photoFile)
+        let responce =await instance.put(`profile/photo`, formData, {headers:{'Content-Type': 'multipart/form-data'}})
+        return  responce.data
+    },
     getUserStatus(userId){
         return instance.get(`profile/status/${userId}`).then(response=>{return response.data})
     },

@@ -1,9 +1,10 @@
 import {profileDAL} from '../api/api'
 import {fetchStatus} from './users-reduser'
 
-const ADD_POST = 'ADD-POST'
+const ADD_POST = 'ADD_POST'
 const PROFILE_CHANGE = 'PROFILE_CHANGE'
 const SET_STATUS = 'SET_STATUS'
+const SET_PHOTO = 'SET_PHOTO'
 
 let initialState = {
 
@@ -13,7 +14,7 @@ let initialState = {
         { id: 3, text: 'nyao', likes: 1024 },
     ],
     profileInfo: null,
-    status:''
+    status:'',
 }
 
 const profileReduser = (state = initialState, action) => {
@@ -29,6 +30,12 @@ const profileReduser = (state = initialState, action) => {
             stateCopy.profileInfo = action.info
             return stateCopy
         }
+
+        case SET_PHOTO:{
+            // let stateCopy = { ...state }
+            // stateCopy.photo = action.photo
+            return { ...state, profileInfo:{...profileInfo, photos: action.photos}}
+        }
         case SET_STATUS:{
             return{
                 ...state,
@@ -40,8 +47,9 @@ const profileReduser = (state = initialState, action) => {
 }
 
 export const addPost = (postText) => ({ type: ADD_POST, postText })
-export const profileInfo = (info) => ({ type: PROFILE_CHANGE, info })
+const profileInfo = (info) => ({ type: PROFILE_CHANGE, info })
 export const setStatus = (status) => ({type: SET_STATUS, status})
+const setUserPhoto = (photos)=>({type:SET_PHOTO, photos})
 
 export const setUserData = (userId)=>{
     return (dispatch)=>{
@@ -52,6 +60,7 @@ export const setUserData = (userId)=>{
         })
     }
 }
+
 export const getUserStatus = (userId)=>{
     return(dispatch)=>{
         profileDAL.getUserStatus(userId).then(data=>{
@@ -59,6 +68,16 @@ export const getUserStatus = (userId)=>{
         })
     }
 }
+
+export const updateUserPhoto = (photoFile) => {
+    return async (dispatch) => {
+        const data = await profileDAL.putUserPhoto(photoFile)
+        if (data.resultCode === 0) {
+            dispatch(setUserPhoto(data.data.photos))
+        }
+    }
+}
+
 export const setNewStatus = (status)=>{
     return (dispatch)=>{
         profileDAL.putUserStatus(status).then(data=>{

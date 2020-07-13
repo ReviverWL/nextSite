@@ -2,9 +2,32 @@
   width: 75%;
   height:75%;
   border-radius: 50%;
+  padding-bottom: 5px;
 }
-.ava{ 
+.ava{
+  position: relative;
   background-color: chartreuse;
   text-align: center;
   /* align-self: center; */
+}
+.showButton{
+  display: inline;
+  position: absolute;
+  left: 39%;
+  bottom: 19%;
+  background-color: grey;
+  border: grey solid 2px;
+  border-radius: 50%;
+}
+
+.hideButton{
+  display: none;
+}
+
+.showSubstrate{
+  display: block;
+  height: 12px;
+}
+.hideSubstrate{
+  display: none;
 }
