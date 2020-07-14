@@ -1,10 +1,10 @@
 import {profileDAL} from '../api/api'
 import {fetchStatus} from './users-reduser'
 
-const ADD_POST = 'ADD_POST'
-const PROFILE_CHANGE = 'PROFILE_CHANGE'
-const SET_STATUS = 'SET_STATUS'
-const SET_PHOTO = 'SET_PHOTO'
+const ADD_POST = 'profile/ADD_POST'
+const PROFILE_CHANGE = 'profile/PROFILE_CHANGE'
+const SET_STATUS = 'profile/SET_STATUS'
+const SET_PHOTO = 'profile/SET_PHOTO'
 
 let initialState = {
 

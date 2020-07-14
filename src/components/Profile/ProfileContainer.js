@@ -11,7 +11,6 @@ import { useEffect } from 'react'
 const ProfileContainer =({match, getUserStatus, setUserData, userId, history, isFetch, ...props})=> {
     const[abilityToChangeProfile, setAbilityToChangeProfile]= useState(false)
     useEffect(()=>{
-        setUser(match.params.userId)
         if (match.params.userId == userId || !match.params.userId) {
                 if (!userId) {
                     history.push('/authentification')
@@ -29,7 +28,8 @@ const ProfileContainer =({match, getUserStatus, setUserData, userId, history, is
         getUserStatus(id)
         setUserData(id)
     }
-            return<>{isFetch ? <Preloader/>:<Profile {...props} abilityToChangeProfile={abilityToChangeProfile}/>} </>
+
+    return<>{isFetch ? <Preloader/>:<Profile {...props} abilityToChangeProfile={abilityToChangeProfile}/>} </>
 }
 
 const mapStateToProps=(state)=>{

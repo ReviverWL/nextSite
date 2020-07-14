@@ -2,8 +2,8 @@ import { fetchStatus } from './users-reduser'
 import {authDAL} from '../api/api'
 import { stopSubmit } from 'redux-form'
 
-const SET_CURRENT_USER = 'SET_CURRENT_USER'
-const CAPTCHA = 'CAPTCHA'
+const SET_CURRENT_USER = 'auth/SET_CURRENT_USER'
+const CAPTCHA = 'auth/CAPTCHA'
 
 let initialState = {
     id:null,

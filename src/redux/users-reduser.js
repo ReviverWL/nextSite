@@ -1,12 +1,12 @@
 import {usersDAL} from '../api/api'
 
-const FOLLOW = 'FOLLOW'
-const UNFOLLOW = 'UNFOLLOW'
-const SET_USERS = 'SET_USERS'
-const CHANGE_PAGE = 'CHANGE_PAGE'
-const SET_USERS_COUNT = 'SET_USERS_COUNT'
-const IS_FETCH_STATUS = 'IS_FETCH_STATUS'
-const FOLLOW_UNFOLLOW_PROGRESS = 'FOLLOW_UNFOLLOW_PROGRESS'
+const FOLLOW = 'users/FOLLOW'
+const UNFOLLOW = 'users/UNFOLLOW'
+const SET_USERS = 'users/SET_USERS'
+const CHANGE_PAGE = 'users/CHANGE_PAGE'
+const SET_USERS_COUNT = 'users/SET_USERS_COUNT'
+const IS_FETCH_STATUS = 'users/IS_FETCH_STATUS'
+const FOLLOW_UNFOLLOW_PROGRESS = 'users/FOLLOW_UNFOLLOW_PROGRESS'
 
 let initialState={
     users:[

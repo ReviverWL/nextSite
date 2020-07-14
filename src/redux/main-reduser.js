@@ -1,6 +1,6 @@
 import { getConfirmedUserData } from "./auth-reduser"
 
-const READY_FOR_ACTIONS = 'READY_FOR_ACTIONS'
+const READY_FOR_ACTIONS = 'main/READY_FOR_ACTIONS'
 
 let initialState = {
     readiness: false
