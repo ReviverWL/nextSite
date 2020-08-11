@@ -35,7 +35,7 @@ const ProfileContainer =({match, getUserStatus, setUserData, userId, history, is
 const mapStateToProps=(state)=>{
     return{
         profilePage: state.profilePage,
-        isFetch: state.usersPage.isFetch,
+        isFetch: state.core.isFetch,
         userId: state.auth.id,
         status: state.profilePage.status
     }

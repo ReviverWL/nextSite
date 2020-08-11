@@ -1,9 +1,11 @@
 import { getConfirmedUserData } from "./auth-reduser"
 
 const READY_FOR_ACTIONS = 'main/READY_FOR_ACTIONS'
+const IS_FETCH_STATUS = 'main/IS_FETCH_STATUS'
 
 let initialState = {
-    readiness: false
+    readiness: false,
+    isFetch: false
 }
 
 const mainReduser = (state = initialState, action)=>{
@@ -14,12 +16,17 @@ const mainReduser = (state = initialState, action)=>{
                 readiness: action.readiness
             }
         }
+        case IS_FETCH_STATUS:
+            return {
+                ...state, isFetch: action.isFetch
+            }
         default:
             return state
     }
 }
 
 const changerReadiness = (readiness)=>{return {type:READY_FOR_ACTIONS, readiness}}
+export const fetchStatus = (isFetch)=>{return{type:IS_FETCH_STATUS, isFetch}}
 
 export const changeReadiness = ()=>{
     return(dispatch)=>{

@@ -1,11 +1,11 @@
 import {usersDAL} from '../api/api'
+import {fetchStatus} from './main-reduser'
 
 const FOLLOW = 'users/FOLLOW'
 const UNFOLLOW = 'users/UNFOLLOW'
 const SET_USERS = 'users/SET_USERS'
 const CHANGE_PAGE = 'users/CHANGE_PAGE'
 const SET_USERS_COUNT = 'users/SET_USERS_COUNT'
-const IS_FETCH_STATUS = 'users/IS_FETCH_STATUS'
 const FOLLOW_UNFOLLOW_PROGRESS = 'users/FOLLOW_UNFOLLOW_PROGRESS'
 
 let initialState={
@@ -15,10 +15,8 @@ let initialState={
         // {id: 3, name: 'Элли', lastName: 'Кавай', follower:true , status: 'Посылаю всех на...видео с ответами)', avatar: '', dislocation:{country: 'Россия',　city: 'Создатель сайта не вдавался в такие подробности'}},
         // {id: 4, name: 'Reviver', lastName: 'WLM', follower:false , status: 'Бункер Save Us', avatar: '', dislocation:{country: 'Вакуум',　city: 'Амёба'}}
     ],
-    pages: [],
     usersCount: 0,
     pageSize: 20,
-    stepAside: 4, //кол-во страниц по бокам относительно выделенной
     currentPage: 1,
     isFetch: false,
     followUnfollowProgress: []
@@ -59,42 +57,10 @@ const usersReduser = (state = initialState, action) => {
             return {
                 ...state, usersCount: action.usersCount
             }
-        case IS_FETCH_STATUS:
-            return {
-                ...state, isFetch: action.isFetch
-            }
-
         case CHANGE_PAGE:
-            let stateCopy = { ...state }
-            let pagesCount = Math.ceil(stateCopy.usersCount / stateCopy.pageSize)
-            stateCopy.currentPage = action.currentPage
-            stateCopy.pages = [...state.pages]
-            stateCopy.pages.length = 0
-            if (stateCopy.currentPage >= 1 && stateCopy.currentPage <= 5) { //страницы с 1 по 9
-
-                for (let i = 1; i < 10; i++) {
-                    stateCopy.pages.push(i)
-                }
+            return{
+                ...state, currentPage: action.currentPage
             }
-            else if (stateCopy.currentPage >= 6 && stateCopy.currentPage <= pagesCount - stateCopy.stepAside) {//логика страниц в центре(тех, что при активации изменяют номера страниц) не считая последние
-                const startCounter = stateCopy.currentPage - stateCopy.stepAside
-                const endCounter = stateCopy.currentPage + stateCopy.stepAside
-                for (let i = startCounter; i <= endCounter; i++) {
-                    stateCopy.pages.push(i)
-                }
-            }
-            else if (stateCopy.currentPage > pagesCount - stateCopy.stepAside && stateCopy.currentPage <= pagesCount) {//фиксированное кол-во страниц
-                for (let i = pagesCount - stateCopy.stepAside * 2; i <= pagesCount; i++) {
-                    stateCopy.pages.push(i)
-                }
-            }
-            else if (stateCopy.currentPage <= 0 || stateCopy.currentPage > pagesCount) {
-                alert("Такой страницы не существует. Введите корректный номер страницы.")
-            }
-            else {
-                alert("Что-то пошло не так. Данные отображаются некорректно. Свяжитесь с администратором")//Место для try/catch
-            }
-            return stateCopy
         default:
             return state
     }
@@ -102,31 +68,26 @@ const usersReduser = (state = initialState, action) => {
 
 
 
-export const changePage = (currentPage)=>{
+const changePage = (currentPage)=>{
     return{type: CHANGE_PAGE, currentPage}
 }
-export const followUnfollowProgress = (progress, id)=>{
+const followUnfollowProgress = (progress, id)=>{
     return{type: FOLLOW_UNFOLLOW_PROGRESS, progress, id}
 }
-
-export const setUsers = (users)=>{
+const setUsers = (users)=>{
     return{type:SET_USERS, users}
 }
-export const setUsersCount = (usersCount)=>{
+const setUsersCount = (usersCount)=>{
     return{type:SET_USERS_COUNT, usersCount}
 }
-export const fetchStatus = (isFetch)=>{
-    return{type:IS_FETCH_STATUS, isFetch}
-}
-
-export const follow = (id)=>{
+const follow = (id)=>{
     return{type: FOLLOW, id}
 }
-export const unfollow = (id)=>{
+const unfollow = (id)=>{
     return{type: UNFOLLOW, id}
 }
 
-export const setUsersData = (currentPage, pageSize) => {
+export const setUsersData = (currentPage = 1, pageSize) => {
     return async (dispatch) => {
         dispatch(fetchStatus(true))
         dispatch(changePage(currentPage))

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useCallback } from 'react'
 import Users from './Users'
 import Preloader from '../../utility_components/Preloader'
 import {setUsersData, setFollow, setUnfollow} from './../../redux/users-reduser'
@@ -8,9 +8,15 @@ import { compose } from 'redux'
 //split & join
 
 const UsersContainer = ({usersPage, setUsersData, setFollow, setUnfollow})=> {
+    // const updatePage = useCallback(()=>{
+    //     setUsersData(currentPage, pageSize)
+    // }, [currentPage, pageSize])
     useEffect(()=>{
-        setUsersData(usersPage.currentPage, usersPage.pageSize)
-    }, [usersPage.currentPage, usersPage.pageSize])
+            if (usersPage.users.length === 0) {
+                setUsersData(undefined , usersPage.pageSize)
+            }
+            else{alert('Yo')}
+    }, [])
 
         return<> 
         {usersPage.isFetch ? <Preloader />:

@@ -1,4 +1,4 @@
-import { fetchStatus } from './users-reduser'
+import {fetchStatus} from './main-reduser'
 import {authDAL} from '../api/api'
 import { stopSubmit } from 'redux-form'
 

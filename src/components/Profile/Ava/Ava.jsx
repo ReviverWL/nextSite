@@ -8,6 +8,8 @@ import SendImageForm from './SendImageForm';
 const Ava = ({setNewStatus, status, photo, abilityToChangeProfile, updateUserPhoto}) => {
     const[buttonVisibility, setButtonVisibility] = useState(style.hideButton)
     const[substrateVisibility, setSubstrateVisibility] = useState(style.hideSubstrate)
+    const[photosrc, setPhoto] = useState('')
+    
     const onMouseOverAva = ()=>{
         setButtonVisibility(style.showButton)
         setSubstrateVisibility(style.showSubstrate)
@@ -16,8 +18,6 @@ const Ava = ({setNewStatus, status, photo, abilityToChangeProfile, updateUserPho
         setButtonVisibility(style.hideButton)
         setSubstrateVisibility(style.hideSubstrate)
     }
-
-    const[photosrc, setPhoto] = useState('')
 
     useEffect(()=>{
         setPhoto(photo)

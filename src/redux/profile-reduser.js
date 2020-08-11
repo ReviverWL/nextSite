@@ -1,5 +1,5 @@
 import {profileDAL} from '../api/api'
-import {fetchStatus} from './users-reduser'
+import {fetchStatus} from './main-reduser'
 
 const ADD_POST = 'profile/ADD_POST'
 const PROFILE_CHANGE = 'profile/PROFILE_CHANGE'
